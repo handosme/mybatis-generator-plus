@@ -32,7 +32,7 @@ import org.mybatis.generator.api.dom.OutputUtilities;
 
 /**
  * @author Jeff Butler
- * @update 向接口中扩充静态常量字段
+ * @update 向接口中扩充静态常量字段 
  */
 public class Interface extends JavaElement implements CompilationUnit {
     private Set<FullyQualifiedJavaType> importedTypes;
