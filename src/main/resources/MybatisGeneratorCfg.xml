@@ -11,11 +11,11 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 
 	<context id="oracel_tables" targetRuntime="MyBatis3">
 		<!-- 自定义序列化 -->
-		<plugin type="mybatisGenerator.custom.CustomSerializablePlugin"></plugin>
+		<plugin type="org.ihansen.mybatis.generator.extend.CustomSerializablePlugin"></plugin>
 		
 		<!-- oracle/mysql方言插件 -->
-		<plugin type="mybatisGenerator.custom.CustomPlugin">
-			<property name="pageHelperClass" value="com.allinpay.zj.tlacp.utils.PageHelper" />
+		<plugin type="org.ihansen.mybatis.generator.extend.CustomPlugin">
+			<property name="pageHelperClass" value="org.ihansen.mybatis.generator.extend.PageHelper" />
 			<property name="dbType" value="ORACLE" />
 		</plugin>
 		
@@ -37,24 +37,24 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
             password="${db1.jdbc.password}" />
 
 		<!-- Oracle自定义类型转换 -->
-		<javaTypeResolver type="mybatisGenerator.custom.CustJavaTypeResolver">
+		<javaTypeResolver type="org.ihansen.mybatis.generator.extend.CustJavaTypeResolver">
 			<!-- 属性可以控制是否强制DECIMAL和NUMERIC类型的字段转换为Java类型的java.math.BigDecimal,默认值为false -->
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
 		<!-- 数据表对应的实体层 -->
-		<javaModelGenerator targetPackage="com.allinpay.zj.tlacp.domain" targetProject="src/main/java">
+		<javaModelGenerator targetPackage="org.ihansen.app.domain" targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
 		<!-- sql mapper 隐射配置文件(xml配置文件) -->
-		<sqlMapGenerator targetPackage="com.allinpay.zj.tlacp.mapper" targetProject="src/main/resources">
+		<sqlMapGenerator targetPackage="org.ihansen.app.mapper" targetProject="src/main/resources">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 		<!-- 在ibatis2 中是dao层，但在mybatis3中，其实就是mapper接口 -->
-		<javaClientGenerator type="XMLMAPPER" targetPackage="com.allinpay.zj.tlacp.domain.operate" targetProject="src/main/java">
+		<javaClientGenerator type="XMLMAPPER" targetPackage="org.ihansen.app.domain.operate" targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
@@ -62,6 +62,7 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 		<table tableName="bus_sec_key" domainObjectName="SecKey">
 			<!-- 自定义属性配置：设置此属性表示该字段自增 -->
 			<property name="incrementField" value="id"/>
+			<!-- 自定义属性配置：对应的数据源名称 -->
 			<property name="dataSourceName" value="DEFAULT"/>
 			<property name="enableCountByExample" value="true"/>
 			<property name="enableUpdateByExample" value="true"/>
