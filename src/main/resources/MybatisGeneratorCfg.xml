@@ -6,8 +6,8 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 	<properties resource="dbcpconfig.properties" />
 	
 	<!-- 配置数据库 驱动jar包路径 -->
-	<classPathEntry location="D:/Java/maven/apache-maven-3.1.0/repo/ojdbc/ojdbc/6/ojdbc-6.jar" />
-	<classPathEntry location="D:/Java/maven/apache-maven-3.1.0/repo/mysql/mysql-connector-java/5.0.8/mysql-connector-java-5.0.8.jar" />
+<!-- 	<classPathEntry location="D:/Java/maven/apache-maven-3.1.0/repo/ojdbc/ojdbc/6/ojdbc-6.jar" /> -->
+<!-- 	<classPathEntry location="D:/Java/maven/apache-maven-3.1.0/repo/mysql/mysql-connector-java/5.0.8/mysql-connector-java-5.0.8.jar" /> -->
 
 	<context id="oracel_tables" targetRuntime="MyBatis3">
 		<!-- 自定义序列化 -->
