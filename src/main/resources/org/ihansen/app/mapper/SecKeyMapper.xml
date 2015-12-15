@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ihansen.app.domain.operate.SecKeyMapper" >
+  <resultMap id="BaseResultMap" type="org.ihansen.app.domain.SecKey" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="MER_ID" property="merId" jdbcType="VARCHAR" />
+    <result column="USE_TYPE" property="useType" jdbcType="VARCHAR" />
+    <result column="KEY_POSI" property="keyPosi" jdbcType="VARCHAR" />
+    <result column="PUB_FILEPATH" property="pubFilepath" jdbcType="VARCHAR" />
+    <result column="PRI_FILEPATH" property="priFilepath" jdbcType="VARCHAR" />
+    <result column="PRI_PWD" property="priPwd" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="DONE_DATE" property="doneDate" jdbcType="TIMESTAMP" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="STATE" property="state" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="USER_PASS" property="userPass" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, MER_ID, USE_TYPE, KEY_POSI, PUB_FILEPATH, PRI_FILEPATH, PRI_PWD, CREATE_DATE, 
+    DONE_DATE, REMARK, STATE, USER_ID, USER_PASS
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.ihansen.app.domain.SecKeyEX" >
+    <include refid="OracleDialectPrefix" />
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from BUS_SEC_KEY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <include refid="OracleDialectSuffix" />
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from BUS_SEC_KEY
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from BUS_SEC_KEY
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.ihansen.app.domain.SecKeyEX" >
+    delete from BUS_SEC_KEY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.ihansen.app.domain.SecKey" >
+    insert into BUS_SEC_KEY (ID, MER_ID, USE_TYPE, 
+      KEY_POSI, PUB_FILEPATH, PRI_FILEPATH, 
+      PRI_PWD, CREATE_DATE, DONE_DATE, 
+      REMARK, STATE, USER_ID, 
+      USER_PASS)
+    values (#{id,jdbcType=DECIMAL}, #{merId,jdbcType=VARCHAR}, #{useType,jdbcType=VARCHAR}, 
+      #{keyPosi,jdbcType=VARCHAR}, #{pubFilepath,jdbcType=VARCHAR}, #{priFilepath,jdbcType=VARCHAR}, 
+      #{priPwd,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{doneDate,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{userPass,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ihansen.app.domain.SecKey" >
+    <selectKey keyProperty="id" resultType="java.lang.Long" order="BEFORE" >
+      select 
+      <include refid="TABLE_SEQUENCE" />
+       from dual
+    </selectKey>
+    insert into BUS_SEC_KEY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="merId != null" >
+        MER_ID,
+      </if>
+      <if test="useType != null" >
+        USE_TYPE,
+      </if>
+      <if test="keyPosi != null" >
+        KEY_POSI,
+      </if>
+      <if test="pubFilepath != null" >
+        PUB_FILEPATH,
+      </if>
+      <if test="priFilepath != null" >
+        PRI_FILEPATH,
+      </if>
+      <if test="priPwd != null" >
+        PRI_PWD,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="doneDate != null" >
+        DONE_DATE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="userPass != null" >
+        USER_PASS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="merId != null" >
+        #{merId,jdbcType=VARCHAR},
+      </if>
+      <if test="useType != null" >
+        #{useType,jdbcType=VARCHAR},
+      </if>
+      <if test="keyPosi != null" >
+        #{keyPosi,jdbcType=VARCHAR},
+      </if>
+      <if test="pubFilepath != null" >
+        #{pubFilepath,jdbcType=VARCHAR},
+      </if>
+      <if test="priFilepath != null" >
+        #{priFilepath,jdbcType=VARCHAR},
+      </if>
+      <if test="priPwd != null" >
+        #{priPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="doneDate != null" >
+        #{doneDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userPass != null" >
+        #{userPass,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.ihansen.app.domain.SecKeyEX" resultType="java.lang.Integer" >
+    select count(*) from BUS_SEC_KEY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update BUS_SEC_KEY
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.merId != null" >
+        MER_ID = #{record.merId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.useType != null" >
+        USE_TYPE = #{record.useType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyPosi != null" >
+        KEY_POSI = #{record.keyPosi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pubFilepath != null" >
+        PUB_FILEPATH = #{record.pubFilepath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priFilepath != null" >
+        PRI_FILEPATH = #{record.priFilepath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priPwd != null" >
+        PRI_PWD = #{record.priPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.doneDate != null" >
+        DONE_DATE = #{record.doneDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        STATE = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPass != null" >
+        USER_PASS = #{record.userPass,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update BUS_SEC_KEY
+    set ID = #{record.id,jdbcType=DECIMAL},
+      MER_ID = #{record.merId,jdbcType=VARCHAR},
+      USE_TYPE = #{record.useType,jdbcType=VARCHAR},
+      KEY_POSI = #{record.keyPosi,jdbcType=VARCHAR},
+      PUB_FILEPATH = #{record.pubFilepath,jdbcType=VARCHAR},
+      PRI_FILEPATH = #{record.priFilepath,jdbcType=VARCHAR},
+      PRI_PWD = #{record.priPwd,jdbcType=VARCHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      DONE_DATE = #{record.doneDate,jdbcType=TIMESTAMP},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      STATE = #{record.state,jdbcType=VARCHAR},
+      USER_ID = #{record.userId,jdbcType=VARCHAR},
+      USER_PASS = #{record.userPass,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ihansen.app.domain.SecKey" >
+    update BUS_SEC_KEY
+    <set >
+      <if test="merId != null" >
+        MER_ID = #{merId,jdbcType=VARCHAR},
+      </if>
+      <if test="useType != null" >
+        USE_TYPE = #{useType,jdbcType=VARCHAR},
+      </if>
+      <if test="keyPosi != null" >
+        KEY_POSI = #{keyPosi,jdbcType=VARCHAR},
+      </if>
+      <if test="pubFilepath != null" >
+        PUB_FILEPATH = #{pubFilepath,jdbcType=VARCHAR},
+      </if>
+      <if test="priFilepath != null" >
+        PRI_FILEPATH = #{priFilepath,jdbcType=VARCHAR},
+      </if>
+      <if test="priPwd != null" >
+        PRI_PWD = #{priPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="doneDate != null" >
+        DONE_DATE = #{doneDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userPass != null" >
+        USER_PASS = #{userPass,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ihansen.app.domain.SecKey" >
+    update BUS_SEC_KEY
+    set MER_ID = #{merId,jdbcType=VARCHAR},
+      USE_TYPE = #{useType,jdbcType=VARCHAR},
+      KEY_POSI = #{keyPosi,jdbcType=VARCHAR},
+      PUB_FILEPATH = #{pubFilepath,jdbcType=VARCHAR},
+      PRI_FILEPATH = #{priFilepath,jdbcType=VARCHAR},
+      PRI_PWD = #{priPwd,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      DONE_DATE = #{doneDate,jdbcType=TIMESTAMP},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=VARCHAR},
+      USER_PASS = #{userPass,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <sql id="OracleDialectPrefix" >
+    <if test="pageHelper != null" >
+      select * from ( select row_.*, rownum rownum_ from ( 
+    </if>
+  </sql>
+  <sql id="OracleDialectSuffix" >
+    <if test="pageHelper != null" >
+      <![CDATA[ ) row_  where rownum <= #{pageHelper.end} ) where rownum_ > #{pageHelper.begin}  ]]>
+    </if>
+  </sql>
+  <sql id="TABLE_SEQUENCE" >
+    BUS_SEC_KEY_SEQUENCE.nextval
+  </sql>
+  <insert id="insertBatch" parameterType="org.ihansen.app.domain.SecKey" >
+    insert into BUS_SEC_KEY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      ID,MER_ID,USE_TYPE,KEY_POSI,PUB_FILEPATH,PRI_FILEPATH,PRI_PWD,CREATE_DATE,DONE_DATE,REMARK,STATE,USER_ID,USER_PASS,
+    </trim>
+    select BUS_SEC_KEY_SEQUENCE.nextval,A.* from(
+    <foreach collection="list" index="index" item="item" separator="UNION ALL" >
+      SELECT
+      <trim suffixOverrides="," >
+        #{item.merId,jdbcType=VARCHAR},#{item.useType,jdbcType=VARCHAR},#{item.keyPosi,jdbcType=VARCHAR},#{item.pubFilepath,jdbcType=VARCHAR},#{item.priFilepath,jdbcType=VARCHAR},#{item.priPwd,jdbcType=VARCHAR},#{item.createDate,jdbcType=TIMESTAMP},#{item.doneDate,jdbcType=TIMESTAMP},#{item.remark,jdbcType=VARCHAR},#{item.state,jdbcType=VARCHAR},#{item.userId,jdbcType=VARCHAR},#{item.userPass,jdbcType=VARCHAR},
+      </trim>
+      from dual
+    </foreach>
+    ) A
+  </insert>
+</mapper>
