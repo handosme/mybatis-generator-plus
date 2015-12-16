@@ -32,7 +32,7 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 		</commentGenerator>
 		
 		<!-- 数据库连接 -->
-		<jdbcConnection driverClass="${db1.jdbc.driverclass}"
+		<jdbcConnection driverClass="${oracle.jdbc.driver}"
 			connectionURL="${db1.jdbc.url}" userId="${db1.jdbc.username}"  
             password="${db1.jdbc.password}" />
 
