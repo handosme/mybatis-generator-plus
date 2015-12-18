@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 		<!-- oracle/mysql方言插件 -->
 		<plugin type="org.ihansen.mybatis.generator.extend.CustomPlugin">
 			<property name="pageHelperClass" value="org.ihansen.mybatis.generator.extend.PageHelper" />
-			<property name="dbType" value="ORACLE" />
+			<property name="dbType" value="SQLSERVER" />
 		</plugin>
 		
 		<!-- 自定义Example类文件名字 -->
@@ -32,11 +32,18 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 		</commentGenerator>
 		
 		<!-- 数据库连接 -->
-		<jdbcConnection driverClass="${oracle.jdbc.driver}"
-			connectionURL="${db1.jdbc.url}" userId="${db1.jdbc.username}"  
-            password="${db1.jdbc.password}" />
+<!-- 		<jdbcConnection driverClass="${oracle.jdbc.driver}" -->
+<!-- 			connectionURL="${db1.jdbc.url}" userId="${db1.jdbc.username}"   -->
+<!--             password="${db1.jdbc.password}" /> -->
+        <jdbcConnection driverClass="${sqlserver.jdbc.driver}"
+			connectionURL="${db5.jdbc.url}" userId="${db5.jdbc.username}"  
+            password="${db5.jdbc.password}" />
+<!--         <jdbcConnection driverClass="${mysql.jdbc.driver}" -->
+<!-- 			connectionURL="${db6.jdbc.url}" userId="${db6.jdbc.username}"   -->
+<!--             password="${db6.jdbc.password}" />     -->
+         
 
-		<!-- Oracle自定义类型转换 -->
+		<!-- 使用于Oracle自定义类型转换 -->
 		<javaTypeResolver type="org.ihansen.mybatis.generator.extend.CustJavaTypeResolver">
 			<!-- 属性可以控制是否强制DECIMAL和NUMERIC类型的字段转换为Java类型的java.math.BigDecimal,默认值为false -->
 			<property name="forceBigDecimals" value="false" />
@@ -45,12 +52,14 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 		<!-- 数据表对应的实体层 -->
 		<javaModelGenerator targetPackage="org.ihansen.app.domain" targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
-			<property name="trimStrings" value="true" />
+			<property name="enableSubPackages" value="true" />
 		</javaModelGenerator>
 
 		<!-- sql mapper 隐射配置文件(xml配置文件) -->
 		<sqlMapGenerator targetPackage="org.ihansen.app.mapper" targetProject="src/main/resources">
 			<property name="enableSubPackages" value="true" />
+			<!-- 此属性表示若已存在xml是否和原文件合并 -->
+			<property name="isMergeable" value="false"/>
 		</sqlMapGenerator>
 
 		<!-- 在ibatis2 中是dao层，但在mybatis3中，其实就是mapper接口 -->
@@ -59,11 +68,11 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 		</javaClientGenerator>
 
 		<!-- 要对那些数据表进行生成操作，必须要有一个 -->
-		<table tableName="bus_sec_key" domainObjectName="SecKey">
+		<table tableName="bus_log" domainObjectName="MSBusLog">
 			<!-- 自定义属性配置：设置此属性表示该字段自增 -->
 			<property name="incrementField" value="id"/>
 			<!-- 自定义属性配置：对应的数据源名称 -->
-			<property name="dataSourceName" value="DEFAULT"/>
+			<property name="dataSourceName" value="db5"/>
 			<property name="enableCountByExample" value="true"/>
 			<property name="enableUpdateByExample" value="true"/>
 			<property name="enableDeleteByExample" value="true"/>

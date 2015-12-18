@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>   
+<!DOCTYPE configuration   
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<properties resource="dbcpconfig.properties" />
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+		<setting name="useGeneratedKeys" value="true" />
+		<setting name="defaultExecutorType" value="REUSE" />
+	</settings>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="jdbc" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${sqlserver.jdbc.driver}" />
+				<property name="url" value="${db5.jdbc.url}" />
+				<property name="username" value="${db5.jdbc.username}" />
+				<property name="password" value="${db5.jdbc.password}" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<!-- oracle -->
+		<mapper resource="org/ihansen/app/mapper/SecKeyMapper.xml"/>
+		<!-- sqlserver -->
+		<mapper resource="org/ihansen/app/mapper/MSBusLogMapper.xml"/>
+		<!-- oracle -->
+		<mapper resource="org/ihansen/app/mapper/BusLogMapper.xml"/>
+	</mappers>
+</configuration> 

@@ -123,4 +123,8 @@ public class XmlElement extends Element {
     public void setName(String name) {
         this.name = name;
     }
+
+	public void removeElement(int index) {
+		elements.remove(index);
+	}
 }

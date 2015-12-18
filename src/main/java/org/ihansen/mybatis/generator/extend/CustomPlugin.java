@@ -9,11 +9,9 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
 
-
-
-
 import org.ihansen.mybatis.generator.extend.dbSupport.MysqlSupport;
 import org.ihansen.mybatis.generator.extend.dbSupport.OracleSupport;
+import org.ihansen.mybatis.generator.extend.dbSupport.SqlServerSupport;
 import org.mybatis.generator.api.CommentGenerator;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
@@ -37,8 +35,7 @@ import org.mybatis.generator.config.TableConfiguration;
  * @CreationDate 2015年8月2日
  * @version 1.0
  */
-public class CustomPlugin extends PluginAdapter
-{
+public class CustomPlugin extends PluginAdapter {
 	private String pageHelperClass;
 	private String dbType;
 
@@ -48,8 +45,7 @@ public class CustomPlugin extends PluginAdapter
 	 * 修改Model类
 	 */
 	@Override
-	public boolean modelBaseRecordClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable)
-	{
+	public boolean modelBaseRecordClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
 		return super.modelBaseRecordClassGenerated(topLevelClass, introspectedTable);
 	}
 
@@ -57,8 +53,7 @@ public class CustomPlugin extends PluginAdapter
 	 * 修改Example类
 	 */
 	@Override
-	public boolean modelExampleClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable)
-	{ // add field, getter, setter for limit clause
+	public boolean modelExampleClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) { 
 		addPage(topLevelClass, introspectedTable, "pageHelper");
 		return super.modelExampleClassGenerated(topLevelClass, introspectedTable);
 	}
@@ -67,14 +62,13 @@ public class CustomPlugin extends PluginAdapter
 	 * 修改Mapper类
 	 */
 	@Override
-	public boolean clientGenerated(Interface interfaze, TopLevelClass topLevelClass, IntrospectedTable introspectedTable)
-	{
-		//1.增加批量插入方式签名
+	public boolean clientGenerated(Interface interfaze, TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+		// 1.增加批量插入方式签名
 		addBatchInsertMethod(interfaze, introspectedTable);
-		
-		//2.增加数据源名称常量
+
+		// 2.增加数据源名称常量
 		addDataSourceNameField(interfaze, introspectedTable);
-		
+
 		return super.clientGenerated(interfaze, topLevelClass, introspectedTable);
 	}
 
@@ -82,22 +76,19 @@ public class CustomPlugin extends PluginAdapter
 	 * 修改mapper.xml,支持分页和批量
 	 */
 	@Override
-	public boolean sqlMapDocumentGenerated(Document document, IntrospectedTable introspectedTable)
-	{
+	public boolean sqlMapDocumentGenerated(Document document, IntrospectedTable introspectedTable) {
 		supportPlugin.sqlDialect(document, introspectedTable);
 		return super.sqlMapDocumentGenerated(document, introspectedTable);
 	}
 
 	@Override
-	public boolean sqlMapSelectByExampleWithoutBLOBsElementGenerated(XmlElement element, IntrospectedTable introspectedTable)
-	{
-		supportPlugin.adaptSelectByExample(element);
-		return super.sqlMapUpdateByExampleWithoutBLOBsElementGenerated(element, introspectedTable);
+	public boolean sqlMapSelectByExampleWithoutBLOBsElementGenerated(XmlElement element, IntrospectedTable introspectedTable) {
+		XmlElement newElement = supportPlugin.adaptSelectByExample(element, introspectedTable);
+		return super.sqlMapUpdateByExampleWithoutBLOBsElementGenerated(newElement, introspectedTable);
 	}
 
 	@Override
-	public boolean sqlMapInsertSelectiveElementGenerated(XmlElement element, IntrospectedTable introspectedTable)
-	{
+	public boolean sqlMapInsertSelectiveElementGenerated(XmlElement element, IntrospectedTable introspectedTable) {
 		supportPlugin.adaptInsertSelective(element, introspectedTable);
 		return super.sqlMapInsertSelectiveElementGenerated(element, introspectedTable);
 	}
@@ -106,56 +97,51 @@ public class CustomPlugin extends PluginAdapter
 	 * This plugin is always valid - no properties are required
 	 */
 	@Override
-	public boolean validate(List<String> warnings)
-	{
+	public boolean validate(List<String> warnings) {
 		pageHelperClass = properties.getProperty("pageHelperClass"); //$NON-NLS-1$
 		dbType = properties.getProperty("dbType"); //$NON-NLS-1$
 
 		boolean valid1 = stringHasValue(pageHelperClass);
 		boolean valid2 = stringHasValue(dbType);
-		if (valid1 && valid2)
-		{
+		if (valid1 && valid2) {
 			dbType = dbType.toUpperCase();// 忽略大小写
-			if (dbType.equals("ORACLE"))
-			{
+			if (dbType.equals("ORACLE")) {
 				supportPlugin = new OracleSupport();
 			}
-			else if (dbType.equals("MYSQL"))
-			{
+			else if (dbType.equals("MYSQL")) {
 				supportPlugin = new MysqlSupport();
 			}
-			else // 不支持其他数据库
-			{
+			else if (dbType.equals("SQLSERVER")) {
+				supportPlugin = new SqlServerSupport();
+			}
+			else{// 不支持其他数据库
 				valid2 = false;
 				warnings.add(getString("RuntimeError.18", "RenameExampleClassPlugin", "searchString"));
 			}
 			Pattern.compile(pageHelperClass);
 			Pattern.compile(dbType);
 		}
-		else
-		{
-			if (!stringHasValue(pageHelperClass))
-			{
+		else {
+			if (!stringHasValue(pageHelperClass)) {
 				warnings.add(getString("ValidationError.18", "RenameExampleClassPlugin", "searchString")); //$NON-NLS-1$
 			}
-			if (!stringHasValue(dbType))
-			{
+			if (!stringHasValue(dbType)) {
 				warnings.add(getString("ValidationError.18", "RenameExampleClassPlugin", "searchString")); //$NON-NLS-1$
 			}
 		}
 
 		return (valid1 && valid2);
 	}
-	
+
 	/**
 	 * 在Mapper类中增加批量插入方法声明
+	 * 
 	 * @author 吴帅
 	 * @parameter @param interfaze
 	 * @parameter @param introspectedTable
 	 * @createDate 2015年9月30日 下午4:43:32
 	 */
-	private void addBatchInsertMethod(Interface interfaze, IntrospectedTable introspectedTable)
-	{
+	private void addBatchInsertMethod(Interface interfaze, IntrospectedTable introspectedTable) {
 		// 设置需要导入的类
 		Set<FullyQualifiedJavaType> importedTypes = new TreeSet<FullyQualifiedJavaType>();
 		importedTypes.add(FullyQualifiedJavaType.getNewListInstance());
@@ -172,16 +158,13 @@ public class CustomPlugin extends PluginAdapter
 		// 4.设置参数列表
 		FullyQualifiedJavaType paramType = FullyQualifiedJavaType.getNewListInstance();
 		FullyQualifiedJavaType paramListType;
-		if (introspectedTable.getRules().generateBaseRecordClass())
-		{
+		if (introspectedTable.getRules().generateBaseRecordClass()) {
 			paramListType = new FullyQualifiedJavaType(introspectedTable.getBaseRecordType());
 		}
-		else if (introspectedTable.getRules().generatePrimaryKeyClass())
-		{
+		else if (introspectedTable.getRules().generatePrimaryKeyClass()) {
 			paramListType = new FullyQualifiedJavaType(introspectedTable.getPrimaryKeyType());
 		}
-		else
-		{
+		else {
 			throw new RuntimeException(getString("RuntimeError.12")); //$NON-NLS-1$  
 		}
 		paramType.addTypeArgument(paramListType);
@@ -191,15 +174,15 @@ public class CustomPlugin extends PluginAdapter
 		interfaze.addImportedTypes(importedTypes);
 		interfaze.addMethod(ibsmethod);
 	}
-	
+
 	/**
 	 * 修改Example类,添加分页支持
+	 * 
 	 * @param topLevelClass
 	 * @param introspectedTable
 	 * @param name
 	 */
-	private void addPage(TopLevelClass topLevelClass, IntrospectedTable introspectedTable, String name)
-	{
+	private void addPage(TopLevelClass topLevelClass, IntrospectedTable introspectedTable, String name) {
 		topLevelClass.addImportedType(new FullyQualifiedJavaType(pageHelperClass));
 		CommentGenerator commentGenerator = context.getCommentGenerator();
 		Field field = new Field();
@@ -225,16 +208,16 @@ public class CustomPlugin extends PluginAdapter
 		commentGenerator.addGeneralMethodComment(method, introspectedTable);
 		topLevelClass.addMethod(method);
 	}
-	
+
 	/**
 	 * 增加数据源名称字段
+	 * 
 	 * @author 吴帅
 	 * @parameter @param interfaze
 	 * @parameter @param introspectedTable
 	 * @createDate 2015年10月2日 上午10:06:47
 	 */
-	private void addDataSourceNameField(Interface interfaze, IntrospectedTable introspectedTable)
-	{
+	private void addDataSourceNameField(Interface interfaze, IntrospectedTable introspectedTable) {
 		TableConfiguration tableConfiguration = introspectedTable.getTableConfiguration();
 		Properties properties = tableConfiguration.getProperties();
 		String dataSourceName = properties.getProperty("dataSourceName");
@@ -244,7 +227,7 @@ public class CustomPlugin extends PluginAdapter
 		field.setFinal(true);
 		field.setType(FullyQualifiedJavaType.getStringInstance());
 		field.setName("DATA_SOURCE_NAME");
-		field.setInitializationString("\""+dataSourceName+"\"");
+		field.setInitializationString("\"" + dataSourceName + "\"");
 		interfaze.addField(field);
 	}
 }

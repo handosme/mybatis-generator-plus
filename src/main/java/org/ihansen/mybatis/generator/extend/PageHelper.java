@@ -33,9 +33,6 @@ public class PageHelper implements Serializable
 	 */
 	private int pageCount;
 
-	public PageHelper()
-	{}
-
 	/**
 	 * 构造函数.
 	 * 

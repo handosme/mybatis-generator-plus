@@ -29,12 +29,13 @@ public interface DBSupport
 	/**
 	 * 条件查询sql适配
 	 * @author 吴帅
+	 * @return 
 	 * @parameter @param element
 	 * @parameter @param preFixId
 	 * @parameter @param sufFixId
 	 * @createDate 2015年9月29日 上午11:59:06
 	 */
-	public void adaptSelectByExample(XmlElement element);
+	public XmlElement adaptSelectByExample(XmlElement element, IntrospectedTable introspectedTable);
 	
 	/**
 	 * 插入sql适配

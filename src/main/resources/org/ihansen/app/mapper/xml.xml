@@ -1,0 +1,46 @@
+<select id="selectByExample" resultMap="BaseResultMap" parameterType="org.ihansen.app.domain.MSBusLogEX">
+	select
+	<if test="distinct">
+		distinct
+	</if>
+	<include refid="Base_Column_List" />
+	from bus_log
+	<if test="_parameter != null">
+		<include refid="Example_Where_Clause" />
+	</if>
+	<if test="orderByClause != null">
+		order by ${orderByClause}
+	</if>
+</select>
+
+<select id="selectByExample" resultMap="BaseResultMap"	parameterType="org.ihansen.app.domain.MSBusLogEX">
+	<include refid="SqlServerDialectPrefix" />
+	select
+	<if test="distinct">
+		distinct
+	</if>
+	row_number() over(
+	<if test="orderByClause != null">
+		order by ${orderByClause}
+	</if>
+	<if test="orderByClause == null">
+		order by id
+	</if>
+	) as _pagination_rownumber,
+	<include refid="Base_Column_List" />
+	from bus_log
+	<if test="_parameter != null">
+		<include refid="Example_Where_Clause" />
+	</if>
+	<include refid="SqlServerDialectSuffix" />
+</select>
+<sql id="SqlServerDialectPrefix">
+	<if test="pageHelper != null">
+		SELECT *FROM (
+	</if>
+</sql>
+<sql id="SqlServerDialectSuffix">
+	<if test="pageHelper != null">
+   <![CDATA[) _pagination_tab WHERE _pagination_rownumber >=#{pageHelper.begin} and _pagination_rownumber < #{pageHelper.end}]]>
+	</if>
+</sql>

@@ -3,8 +3,6 @@ package org.ihansen.mybatis.generator.extend.dbSupport;
 import java.util.List;
 import java.util.Properties;
 
-
-
 import org.ihansen.mybatis.generator.extend.DBSupport;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
@@ -15,8 +13,7 @@ import org.mybatis.generator.api.dom.xml.TextElement;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 import org.mybatis.generator.config.TableConfiguration;
 
-public class OracleSupport implements DBSupport
-{
+public class OracleSupport implements DBSupport {
 	/**
 	 * 向&lt;mapper&gt;中子节点中添加支持批量和分页查询的sql代码块
 	 * 
@@ -26,8 +23,7 @@ public class OracleSupport implements DBSupport
 	 * @createDate 2015年9月29日 上午10:20:11
 	 */
 	@Override
-	public void sqlDialect(Document document, IntrospectedTable introspectedTable)
-	{
+	public void sqlDialect(Document document, IntrospectedTable introspectedTable) {
 		XmlElement parentElement = document.getRootElement();
 		// 1.产生分页语句前半部分
 		XmlElement paginationPrefixElement = new XmlElement("sql");
@@ -67,16 +63,20 @@ public class OracleSupport implements DBSupport
 	 * @createDate 2015年8月9日 下午6:57:43
 	 */
 	@Override
-	public void addBatchInsertXml(Document document, IntrospectedTable introspectedTable)
-	{
+	public void addBatchInsertXml(Document document, IntrospectedTable introspectedTable) {
 		List<IntrospectedColumn> columns = introspectedTable.getAllColumns();
+		//获得要自增的列名
+		String incrementField = introspectedTable.getTableConfiguration().getProperties().getProperty("incrementField");
+		if(incrementField!=null){
+			incrementField = incrementField.toUpperCase();
+		}
+		
 		StringBuilder dbcolumnsName = new StringBuilder();
 		StringBuilder javaPropertyAndDbType = new StringBuilder();
-		for (IntrospectedColumn introspectedColumn : columns)
-		{
-			dbcolumnsName.append(introspectedColumn.getActualColumnName() + ",");
-			if (!introspectedColumn.getActualColumnName().equals("ID"))// 不设置id
-			{
+		for (IntrospectedColumn introspectedColumn : columns) {
+			String columnName = introspectedColumn.getActualColumnName();
+			dbcolumnsName.append(columnName + ",");
+			if (!columnName.toUpperCase().equals(incrementField)){// 不设置id
 				javaPropertyAndDbType.append("#{item." + introspectedColumn.getJavaProperty() + ",jdbcType=" + introspectedColumn.getJdbcTypeName() + "},");
 			}
 		}
@@ -115,6 +115,7 @@ public class OracleSupport implements DBSupport
 
 	/**
 	 * 向查询节点中添加分页支持
+	 * 
 	 * @author 吴帅
 	 * @parameter @param element
 	 * @parameter @param preFixId
@@ -122,31 +123,30 @@ public class OracleSupport implements DBSupport
 	 * @createDate 2015年9月29日 上午11:59:06
 	 */
 	@Override
-	public void adaptSelectByExample(XmlElement element)
-	{
+	public XmlElement adaptSelectByExample(XmlElement element, IntrospectedTable introspectedTable) {
 		XmlElement pageStart = new XmlElement("include"); //$NON-NLS-1$   
-		pageStart.addAttribute(new Attribute("refid",  "OracleDialectPrefix"));
+		pageStart.addAttribute(new Attribute("refid", "OracleDialectPrefix"));
 		element.getElements().add(0, pageStart);
 		XmlElement isNotNullElement = new XmlElement("include"); //$NON-NLS-1$   
 		isNotNullElement.addAttribute(new Attribute("refid", "OracleDialectSuffix"));
 		element.getElements().add(isNotNullElement);
+		return element;
 	}
 
 	/**
 	 * 在单条插入动态sql中增加查询序列，以实现oracle主键自增
+	 * 
 	 * @author 吴帅
 	 * @parameter @param element
 	 * @parameter @param introspectedTable
 	 * @createDate 2015年9月29日 下午12:00:37
 	 */
 	@Override
-	public void adaptInsertSelective(XmlElement element, IntrospectedTable introspectedTable)
-	{
+	public void adaptInsertSelective(XmlElement element, IntrospectedTable introspectedTable) {
 		TableConfiguration tableConfiguration = introspectedTable.getTableConfiguration();
 		Properties properties = tableConfiguration.getProperties();
 		String incrementFieldName = properties.getProperty("incrementField");
-		if (incrementFieldName != null)// 有自增字段的配置
-		{
+		if (incrementFieldName != null) {// 有自增字段的配置
 			List<Element> elements = element.getElements();
 			XmlElement selectKey = new XmlElement("selectKey");
 			selectKey.addAttribute(new Attribute("keyProperty", incrementFieldName));

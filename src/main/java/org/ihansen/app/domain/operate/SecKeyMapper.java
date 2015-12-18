@@ -6,7 +6,7 @@ import org.ihansen.app.domain.SecKey;
 import org.ihansen.app.domain.SecKeyEX;
 
 public interface SecKeyMapper {
-    public static final String DATA_SOURCE_NAME = "DEFAULT";
+    public static final String DATA_SOURCE_NAME = "db1";
 
     int countByExample(SecKeyEX example);
 
