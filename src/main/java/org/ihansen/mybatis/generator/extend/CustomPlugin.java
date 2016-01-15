@@ -59,7 +59,7 @@ public class CustomPlugin extends PluginAdapter {
 	 * @createDate 2016年1月15日 上午11:27:58
 	 */
 	private void addBuilder(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
-		//1. add InnerClass
+		//1. add InnerClass(Static Nested Classes)
 		InnerClass builder = new InnerClass("Builder");
 		builder.setStatic(true);
 		builder.setVisibility(JavaVisibility.PUBLIC);
