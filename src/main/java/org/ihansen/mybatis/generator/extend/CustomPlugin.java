@@ -17,6 +17,7 @@ import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
 import org.mybatis.generator.api.dom.java.Field;
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
+import org.mybatis.generator.api.dom.java.InnerClass;
 import org.mybatis.generator.api.dom.java.Interface;
 import org.mybatis.generator.api.dom.java.JavaVisibility;
 import org.mybatis.generator.api.dom.java.Method;
@@ -46,7 +47,61 @@ public class CustomPlugin extends PluginAdapter {
 	 */
 	@Override
 	public boolean modelBaseRecordClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+		addBuilder(topLevelClass, introspectedTable);
 		return super.modelBaseRecordClassGenerated(topLevelClass, introspectedTable);
+	}
+
+	/**
+	 * Model类添加使用Builder设计模式的构造方式
+	 * @author 吴帅
+	 * @parameter @param topLevelClass
+	 * @parameter @param introspectedTable
+	 * @createDate 2016年1月15日 上午11:27:58
+	 */
+	private void addBuilder(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+		//1. add InnerClass
+		InnerClass builder = new InnerClass("Builder");
+		builder.setStatic(true);
+		builder.setVisibility(JavaVisibility.PUBLIC);
+		List<Field> fields = topLevelClass.getFields();
+		for (Field field : fields) {
+			if("serialVersionUID".equals(field.getName()))//Builder不需要序列化
+				continue;
+			builder.addField(field);
+			Method setter = new Method(field.getName());
+			setter.setVisibility(JavaVisibility.PUBLIC);
+			setter.setReturnType(new FullyQualifiedJavaType("Builder"));
+			setter.addParameter(new Parameter(field.getType(), field.getName()));
+			setter.addBodyLine("this."+field.getName()+" = "+field.getName()+";");
+			setter.addBodyLine("return this;");
+			builder.addMethod(setter);
+		}
+		Method build = new Method("build");
+		build.setVisibility(JavaVisibility.PUBLIC);
+		build.setReturnType(new FullyQualifiedJavaType(topLevelClass.getType().getShortName()));
+		build.addBodyLine("return new "+topLevelClass.getType().getShortName()+"(this);");
+		builder.addMethod(build);
+		topLevelClass.addInnerClass(builder);
+		
+		//2. add constructor
+		Method constructor = new Method(topLevelClass.getType().getShortName());
+		constructor.setConstructor(true);
+		constructor.setVisibility(JavaVisibility.PRIVATE);
+		constructor.addParameter(new Parameter(new FullyQualifiedJavaType("Builder"), "b"));
+		for (Field field : fields) {
+			if("serialVersionUID".equals(field.getName()))//Builder不需要序列化
+				continue;
+			constructor.addBodyLine(field.getName()+" = b."+field.getName()+";");
+		}
+		topLevelClass.addMethod(constructor);
+		
+		
+		//3. add default constructor
+		Method defConstructor = new Method(topLevelClass.getType().getShortName());
+		defConstructor.setConstructor(true);
+		defConstructor.setVisibility(JavaVisibility.PUBLIC);
+		defConstructor.addBodyLine("super();");
+		topLevelClass.addMethod(defConstructor);
 	}
 
 	/**

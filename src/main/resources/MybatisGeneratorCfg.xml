@@ -13,10 +13,10 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 		<!-- 自定义序列化 -->
 		<plugin type="org.ihansen.mybatis.generator.extend.CustomSerializablePlugin"></plugin>
 		
-		<!-- oracle/mysql方言插件 -->
+		<!-- oracle/mysql/sqlserver方言插件 -->
 		<plugin type="org.ihansen.mybatis.generator.extend.CustomPlugin">
 			<property name="pageHelperClass" value="org.ihansen.mybatis.generator.extend.PageHelper" />
-			<property name="dbType" value="SQLSERVER" />
+			<property name="dbType" value="ORACLE" />
 		</plugin>
 		
 		<!-- 自定义Example类文件名字 -->
@@ -32,12 +32,12 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 		</commentGenerator>
 		
 		<!-- 数据库连接 -->
-<!-- 		<jdbcConnection driverClass="${oracle.jdbc.driver}" -->
-<!-- 			connectionURL="${db1.jdbc.url}" userId="${db1.jdbc.username}"   -->
-<!--             password="${db1.jdbc.password}" /> -->
-        <jdbcConnection driverClass="${sqlserver.jdbc.driver}"
-			connectionURL="${db5.jdbc.url}" userId="${db5.jdbc.username}"  
-            password="${db5.jdbc.password}" />
+		<jdbcConnection driverClass="${oracle.jdbc.driver}"
+			connectionURL="${db1.jdbc.url}" userId="${db1.jdbc.username}"  
+            password="${db1.jdbc.password}" />
+<!--         <jdbcConnection driverClass="${sqlserver.jdbc.driver}" -->
+<!-- 			connectionURL="${db5.jdbc.url}" userId="${db5.jdbc.username}"   -->
+<!--             password="${db5.jdbc.password}" /> -->
 <!--         <jdbcConnection driverClass="${mysql.jdbc.driver}" -->
 <!-- 			connectionURL="${db6.jdbc.url}" userId="${db6.jdbc.username}"   -->
 <!--             password="${db6.jdbc.password}" />     -->
@@ -58,7 +58,7 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 		<!-- sql mapper 隐射配置文件(xml配置文件) -->
 		<sqlMapGenerator targetPackage="org.ihansen.app.mapper" targetProject="src/main/resources">
 			<property name="enableSubPackages" value="true" />
-			<!-- 此属性表示若已存在xml是否和原文件合并 -->
+			<!-- 此属性表示是否和原xml合并,false表示覆盖 -->
 			<property name="isMergeable" value="false"/>
 		</sqlMapGenerator>
 
@@ -68,11 +68,11 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 		</javaClientGenerator>
 
 		<!-- 要对那些数据表进行生成操作，必须要有一个 -->
-		<table tableName="bus_log" domainObjectName="MSBusLog">
+		<table tableName="bus_sec_key" domainObjectName="SecKey">
 			<!-- 自定义属性配置：设置此属性表示该字段自增 -->
 			<property name="incrementField" value="id"/>
 			<!-- 自定义属性配置：对应的数据源名称 -->
-			<property name="dataSourceName" value="db5"/>
+			<property name="dataSourceName" value="db1"/>
 			<property name="enableCountByExample" value="true"/>
 			<property name="enableUpdateByExample" value="true"/>
 			<property name="enableDeleteByExample" value="true"/>

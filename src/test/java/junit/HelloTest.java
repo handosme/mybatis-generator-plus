@@ -49,6 +49,11 @@ public class HelloTest {
 		 SecKeyMapper secKeyMapper = sqlSession.getMapper(SecKeyMapper.class);
 		 SecKey secKey = secKeyMapper.selectByPrimaryKey(1l);
 		 System.out.println(secKey);
+		 
+		 SecKey in = new SecKey.Builder().merId("bbu").build();
+		 System.out.println(in.getMerId());
+		 secKeyMapper.insertSelective(in);
+		 sqlSession.commit();
 	}
 	
 	/**

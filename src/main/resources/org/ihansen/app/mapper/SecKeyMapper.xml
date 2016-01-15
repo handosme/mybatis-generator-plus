@@ -15,6 +15,7 @@
     <result column="STATE" property="state" jdbcType="VARCHAR" />
     <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
     <result column="USER_PASS" property="userPass" jdbcType="VARCHAR" />
+    <result column="ORG_TYPE" property="orgType" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -76,7 +77,7 @@
   </sql>
   <sql id="Base_Column_List" >
     ID, MER_ID, USE_TYPE, KEY_POSI, PUB_FILEPATH, PRI_FILEPATH, PRI_PWD, CREATE_DATE, 
-    DONE_DATE, REMARK, STATE, USER_ID, USER_PASS
+    DONE_DATE, REMARK, STATE, USER_ID, USER_PASS, ORG_TYPE
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.ihansen.app.domain.SecKeyEX" >
     <include refid="OracleDialectPrefix" />
@@ -115,12 +116,12 @@
       KEY_POSI, PUB_FILEPATH, PRI_FILEPATH, 
       PRI_PWD, CREATE_DATE, DONE_DATE, 
       REMARK, STATE, USER_ID, 
-      USER_PASS)
+      USER_PASS, ORG_TYPE)
     values (#{id,jdbcType=DECIMAL}, #{merId,jdbcType=VARCHAR}, #{useType,jdbcType=VARCHAR}, 
       #{keyPosi,jdbcType=VARCHAR}, #{pubFilepath,jdbcType=VARCHAR}, #{priFilepath,jdbcType=VARCHAR}, 
       #{priPwd,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{doneDate,jdbcType=TIMESTAMP}, 
       #{remark,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
-      #{userPass,jdbcType=VARCHAR})
+      #{userPass,jdbcType=VARCHAR}, #{orgType,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.ihansen.app.domain.SecKey" >
     <selectKey keyProperty="id" resultType="java.lang.Long" order="BEFORE" >
@@ -169,6 +170,9 @@
       <if test="userPass != null" >
         USER_PASS,
       </if>
+      <if test="orgType != null" >
+        ORG_TYPE,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -209,6 +213,9 @@
       </if>
       <if test="userPass != null" >
         #{userPass,jdbcType=VARCHAR},
+      </if>
+      <if test="orgType != null" >
+        #{orgType,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -260,6 +267,9 @@
       <if test="record.userPass != null" >
         USER_PASS = #{record.userPass,jdbcType=VARCHAR},
       </if>
+      <if test="record.orgType != null" >
+        ORG_TYPE = #{record.orgType,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -279,7 +289,8 @@
       REMARK = #{record.remark,jdbcType=VARCHAR},
       STATE = #{record.state,jdbcType=VARCHAR},
       USER_ID = #{record.userId,jdbcType=VARCHAR},
-      USER_PASS = #{record.userPass,jdbcType=VARCHAR}
+      USER_PASS = #{record.userPass,jdbcType=VARCHAR},
+      ORG_TYPE = #{record.orgType,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -323,6 +334,9 @@
       <if test="userPass != null" >
         USER_PASS = #{userPass,jdbcType=VARCHAR},
       </if>
+      <if test="orgType != null" >
+        ORG_TYPE = #{orgType,jdbcType=VARCHAR},
+      </if>
     </set>
     where ID = #{id,jdbcType=DECIMAL}
   </update>
@@ -339,7 +353,8 @@
       REMARK = #{remark,jdbcType=VARCHAR},
       STATE = #{state,jdbcType=VARCHAR},
       USER_ID = #{userId,jdbcType=VARCHAR},
-      USER_PASS = #{userPass,jdbcType=VARCHAR}
+      USER_PASS = #{userPass,jdbcType=VARCHAR},
+      ORG_TYPE = #{orgType,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=DECIMAL}
   </update>
   <sql id="OracleDialectPrefix" >
@@ -358,13 +373,13 @@
   <insert id="insertBatch" parameterType="org.ihansen.app.domain.SecKey" >
     insert into BUS_SEC_KEY
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      ID,MER_ID,USE_TYPE,KEY_POSI,PUB_FILEPATH,PRI_FILEPATH,PRI_PWD,CREATE_DATE,DONE_DATE,REMARK,STATE,USER_ID,USER_PASS,
+      ID,MER_ID,USE_TYPE,KEY_POSI,PUB_FILEPATH,PRI_FILEPATH,PRI_PWD,CREATE_DATE,DONE_DATE,REMARK,STATE,USER_ID,USER_PASS,ORG_TYPE,
     </trim>
     select BUS_SEC_KEY_SEQUENCE.nextval,A.* from(
     <foreach collection="list" index="index" item="item" separator="UNION ALL" >
       SELECT
       <trim suffixOverrides="," >
-        #{item.merId,jdbcType=VARCHAR},#{item.useType,jdbcType=VARCHAR},#{item.keyPosi,jdbcType=VARCHAR},#{item.pubFilepath,jdbcType=VARCHAR},#{item.priFilepath,jdbcType=VARCHAR},#{item.priPwd,jdbcType=VARCHAR},#{item.createDate,jdbcType=TIMESTAMP},#{item.doneDate,jdbcType=TIMESTAMP},#{item.remark,jdbcType=VARCHAR},#{item.state,jdbcType=VARCHAR},#{item.userId,jdbcType=VARCHAR},#{item.userPass,jdbcType=VARCHAR},
+        #{item.merId,jdbcType=VARCHAR},#{item.useType,jdbcType=VARCHAR},#{item.keyPosi,jdbcType=VARCHAR},#{item.pubFilepath,jdbcType=VARCHAR},#{item.priFilepath,jdbcType=VARCHAR},#{item.priPwd,jdbcType=VARCHAR},#{item.createDate,jdbcType=TIMESTAMP},#{item.doneDate,jdbcType=TIMESTAMP},#{item.remark,jdbcType=VARCHAR},#{item.state,jdbcType=VARCHAR},#{item.userId,jdbcType=VARCHAR},#{item.userPass,jdbcType=VARCHAR},#{item.orgType,jdbcType=VARCHAR},
       </trim>
       from dual
     </foreach>

@@ -30,6 +30,8 @@ public class SecKey implements Serializable {
 
     private String userPass;
 
+    private String orgType;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -45,7 +47,7 @@ public class SecKey implements Serializable {
     }
 
     public void setMerId(String merId) {
-        this.merId = merId == null ? null : merId.trim();
+        this.merId = merId;
     }
 
     public String getUseType() {
@@ -53,7 +55,7 @@ public class SecKey implements Serializable {
     }
 
     public void setUseType(String useType) {
-        this.useType = useType == null ? null : useType.trim();
+        this.useType = useType;
     }
 
     public String getKeyPosi() {
@@ -61,7 +63,7 @@ public class SecKey implements Serializable {
     }
 
     public void setKeyPosi(String keyPosi) {
-        this.keyPosi = keyPosi == null ? null : keyPosi.trim();
+        this.keyPosi = keyPosi;
     }
 
     public String getPubFilepath() {
@@ -69,7 +71,7 @@ public class SecKey implements Serializable {
     }
 
     public void setPubFilepath(String pubFilepath) {
-        this.pubFilepath = pubFilepath == null ? null : pubFilepath.trim();
+        this.pubFilepath = pubFilepath;
     }
 
     public String getPriFilepath() {
@@ -77,7 +79,7 @@ public class SecKey implements Serializable {
     }
 
     public void setPriFilepath(String priFilepath) {
-        this.priFilepath = priFilepath == null ? null : priFilepath.trim();
+        this.priFilepath = priFilepath;
     }
 
     public String getPriPwd() {
@@ -85,7 +87,7 @@ public class SecKey implements Serializable {
     }
 
     public void setPriPwd(String priPwd) {
-        this.priPwd = priPwd == null ? null : priPwd.trim();
+        this.priPwd = priPwd;
     }
 
     public Date getCreateDate() {
@@ -109,7 +111,7 @@ public class SecKey implements Serializable {
     }
 
     public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
+        this.remark = remark;
     }
 
     public String getState() {
@@ -117,7 +119,7 @@ public class SecKey implements Serializable {
     }
 
     public void setState(String state) {
-        this.state = state == null ? null : state.trim();
+        this.state = state;
     }
 
     public String getUserId() {
@@ -125,7 +127,7 @@ public class SecKey implements Serializable {
     }
 
     public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
+        this.userId = userId;
     }
 
     public String getUserPass() {
@@ -133,6 +135,139 @@ public class SecKey implements Serializable {
     }
 
     public void setUserPass(String userPass) {
-        this.userPass = userPass == null ? null : userPass.trim();
+        this.userPass = userPass;
+    }
+
+    public String getOrgType() {
+        return orgType;
+    }
+
+    public void setOrgType(String orgType) {
+        this.orgType = orgType;
+    }
+
+    private SecKey(Builder b) {
+        id = b.id;
+        merId = b.merId;
+        useType = b.useType;
+        keyPosi = b.keyPosi;
+        pubFilepath = b.pubFilepath;
+        priFilepath = b.priFilepath;
+        priPwd = b.priPwd;
+        createDate = b.createDate;
+        doneDate = b.doneDate;
+        remark = b.remark;
+        state = b.state;
+        userId = b.userId;
+        userPass = b.userPass;
+        orgType = b.orgType;
+    }
+
+    public SecKey() {
+        super();
+    }
+
+    public static class Builder {
+        private Long id;
+
+        private String merId;
+
+        private String useType;
+
+        private String keyPosi;
+
+        private String pubFilepath;
+
+        private String priFilepath;
+
+        private String priPwd;
+
+        private Date createDate;
+
+        private Date doneDate;
+
+        private String remark;
+
+        private String state;
+
+        private String userId;
+
+        private String userPass;
+
+        private String orgType;
+
+        public Builder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder merId(String merId) {
+            this.merId = merId;
+            return this;
+        }
+
+        public Builder useType(String useType) {
+            this.useType = useType;
+            return this;
+        }
+
+        public Builder keyPosi(String keyPosi) {
+            this.keyPosi = keyPosi;
+            return this;
+        }
+
+        public Builder pubFilepath(String pubFilepath) {
+            this.pubFilepath = pubFilepath;
+            return this;
+        }
+
+        public Builder priFilepath(String priFilepath) {
+            this.priFilepath = priFilepath;
+            return this;
+        }
+
+        public Builder priPwd(String priPwd) {
+            this.priPwd = priPwd;
+            return this;
+        }
+
+        public Builder createDate(Date createDate) {
+            this.createDate = createDate;
+            return this;
+        }
+
+        public Builder doneDate(Date doneDate) {
+            this.doneDate = doneDate;
+            return this;
+        }
+
+        public Builder remark(String remark) {
+            this.remark = remark;
+            return this;
+        }
+
+        public Builder state(String state) {
+            this.state = state;
+            return this;
+        }
+
+        public Builder userId(String userId) {
+            this.userId = userId;
+            return this;
+        }
+
+        public Builder userPass(String userPass) {
+            this.userPass = userPass;
+            return this;
+        }
+
+        public Builder orgType(String orgType) {
+            this.orgType = orgType;
+            return this;
+        }
+
+        public SecKey build() {
+            return new SecKey(this);
+        }
     }
 }

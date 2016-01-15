@@ -998,6 +998,76 @@ public class SecKeyEX implements Serializable {
             addCriterion("USER_PASS not between", value1, value2, "userPass");
             return (Criteria) this;
         }
+
+        public Criteria andOrgTypeIsNull() {
+            addCriterion("ORG_TYPE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgTypeIsNotNull() {
+            addCriterion("ORG_TYPE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgTypeEqualTo(String value) {
+            addCriterion("ORG_TYPE =", value, "orgType");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgTypeNotEqualTo(String value) {
+            addCriterion("ORG_TYPE <>", value, "orgType");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgTypeGreaterThan(String value) {
+            addCriterion("ORG_TYPE >", value, "orgType");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("ORG_TYPE >=", value, "orgType");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgTypeLessThan(String value) {
+            addCriterion("ORG_TYPE <", value, "orgType");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgTypeLessThanOrEqualTo(String value) {
+            addCriterion("ORG_TYPE <=", value, "orgType");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgTypeLike(String value) {
+            addCriterion("ORG_TYPE like", value, "orgType");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgTypeNotLike(String value) {
+            addCriterion("ORG_TYPE not like", value, "orgType");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgTypeIn(List<String> values) {
+            addCriterion("ORG_TYPE in", values, "orgType");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgTypeNotIn(List<String> values) {
+            addCriterion("ORG_TYPE not in", values, "orgType");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgTypeBetween(String value1, String value2) {
+            addCriterion("ORG_TYPE between", value1, value2, "orgType");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgTypeNotBetween(String value1, String value2) {
+            addCriterion("ORG_TYPE not between", value1, value2, "orgType");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria implements Serializable {
