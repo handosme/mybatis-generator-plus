@@ -1,3 +1,18 @@
-/.idea
-/target
-mybatis-generator-plus.iml
+.classpath
+.project
+.settings/
+
+*.iml
+.idea/
+
+# Others
+target/
+logs/
+bak/
+
+.DS_Store
+.tern-project
+.war
+.zip
+.rar
+
