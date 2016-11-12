@@ -1,6 +1,6 @@
 # mybatis-generator-core
 基于mybatis-generator-core-1.3.2 源码的扩展，增加一些特性 <br>
-程序运行入口：<a href="https://github.com/handosme/mybatis-generator-core/blob/master/src/main/java/org/ihansen/mybatis/generator/MainClass.java" target="_Blank">org.ihansen.mybatis.generator.MainClass.main(String[])</a><br>
+程序运行入口：<a href="https://github.com/handosme/mybatis-generator-core/blob/master/src/main/java/org/ihansen/mybatis/generator/MainClass.java" target="_Blank">MainClass.main(String[])</a><br>
 自动代码配置文件：<a href="https://github.com/handosme/mybatis-generator-core/blob/master/src/main/resources/MybatisGeneratorCfg.xml" target="_Blank">/src/main/resources/MybatisGeneratorCfg.xml</a><br>
 
 <h4>v1.0特性:</h4>
