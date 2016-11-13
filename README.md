@@ -2,7 +2,8 @@
 基于mybatis generator core v.1.3.2 源码的扩展，增加一些特性 
 dmeo程序入口: [demo.MBPMain.main](href="https://github.com/handosme/mybatis-generator-core/blob/master/src/main/java/org/ihansen/mybatis/generator/MainClass.java)  
 ```java
-public static final String CFG_FILE_PATH = MBPMain.class.getResource("/MybatisGeneratorCfg.xml").getFile();
+
+    public static final String CFG_FILE_PATH = MBPMain.class.getResource("/MybatisGeneratorCfg.xml").getFile();
 
 	public static void main(String[] args) {
 		List<String> warnings = new ArrayList<>();
@@ -65,10 +66,12 @@ public static final String CFG_FILE_PATH = MBPMain.class.getResource("/MybatisGe
 			e.printStackTrace();
 		}
 	}
+	
 ```
 
 
 MBP配置文件参考: [MybatisGeneratorCfg.xml](https://github.com/handosme/mybatis-generator-core/blob/master/src/main/resources/MybatisGeneratorCfg.xml")  
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE generatorConfiguration

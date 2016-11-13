@@ -1,6 +1,9 @@
 package demo;
 
 
+import demo.domain.User;
+import demo.domain.UserExample;
+import demo.mapper.UserMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -10,10 +13,15 @@ import org.junit.Test;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class HelloTest {
 
 	SqlSession sqlSession;
+
+	UserMapper userMapper;
 	
 	@Before
 	public void before() throws FileNotFoundException {
@@ -24,101 +32,64 @@ public class HelloTest {
 		// 构建sqlSession的工厂
 		SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(is);
 		sqlSession = sessionFactory.openSession();
-
+		userMapper = sqlSession.getMapper(UserMapper.class);
 	}
 
 	/**
-	 * oracle数据库测试
+	 * insert Test
 	 * @author 吴帅
 	 * @parameter @throws Exception
 	 * @createDate 2015年12月18日 下午4:11:18
 	 */
 	@Test
-	public void t1() throws Exception {
-//		 SecKeyMapper secKeyMapper = sqlSession.getMapper(SecKeyMapper.class);
-//		 SecKey secKey = secKeyMapper.selectByPrimaryKey(1l);
-//		 System.out.println(secKey);
-//
-//		 SecKey in = new SecKey.Builder().merId("bbu").build();
-//		 System.out.println(in.getMerId());
-//		 secKeyMapper.insertSelective(in);
-		 sqlSession.commit();
+	public void insertTest() throws Exception {
+		User user = new User.Builder()
+				.userName("insert_testzzzzzz")
+				.creatTime(new Date())
+				.updateTime(new Date())
+				.build();
+		userMapper.insertSelective(user);
+		sqlSession.commit();
 	}
 	
 	/**
-	 * sqlserver数据库测试
+	 * insertBatch Test
 	 * @author 吴帅
 	 * @parameter @throws Exception
 	 * @createDate 2015年12月18日 下午4:11:33
 	 */
 	@Test
-	public void t2() throws Exception {
-//		MSBusLogMapper msBusLogMapper = sqlSession.getMapper(MSBusLogMapper.class);
-//		MSBusLogEX msBusLogEX = new MSBusLogEX();
-//		msBusLogEX.createCriteria().andBusIdEqualTo("10002");
-//		msBusLogEX.setOrderByClause("id");
-//		PageHelper pageHelper = new PageHelper(6,5);
-//		msBusLogEX.setPageHelper(pageHelper);
-//		List<MSBusLog> msBusLogs = msBusLogMapper.selectByExample(msBusLogEX);
-//		for (MSBusLog msBusLog : msBusLogs) {
-//			System.out.println(msBusLog.getContent());
-//		}
+	public void insertBatchTest() throws Exception {
+		List<User> userList = new ArrayList<>();
+		for (int i = 0; i < 5; i++) {
+			User user = new User.Builder()
+					.userName("insertBatch_test"+i)
+					.isDeleted((byte) 0)
+					.creatTime(new Date())
+					.updateTime(new Date())
+					.build();
+			userList.add(user);
+		}
+		userMapper.insertBatch(userList);
+		sqlSession.commit();
 	}
 
 	/**
-	 * sqlserver数据库测试
-	 * @author 吴帅
-	 * @parameter @throws Exception
-	 * @createDate 2015年12月18日 下午4:11:50
-	 */
+	 * select Test
+	 * @throws Exception
+     */
 	@Test
-	public void t3() throws Exception {
-//		MSBusLogMapper msBusLogMapper = sqlSession.getMapper(MSBusLogMapper.class);
-//
-//		List<MSBusLog> msBusLogs = new ArrayList<MSBusLog>();
-//		for(int i=0;i<3;i++){
-//			MSBusLog msBusLog = new MSBusLog();
-//			msBusLog.setBusId("30001");
-//			msBusLog.setOperatorId("000001");
-//			msBusLog.setContent("批量"+i);
-//			msBusLog.setDoneDate(new Date());
-//			msBusLog.setResult("S");
-//			msBusLog.setState("U");
-//			if(i%2==0){
-//				msBusLog.setRemark("ok");
-//			}
-//			msBusLogs.add(msBusLog);
-//		}
-//		msBusLogMapper.insertBatch(msBusLogs);
-		sqlSession.commit();
+	public void selectTest() throws Exception {
+		UserExample userExample = new UserExample();
+		userExample.createCriteria().andUserNameLike("%0%");
+		List<User> userList = userMapper.selectByExample(userExample);
+		//TODO verify
+		System.out.println(userList);
 	}
-	
-	/**
-	 * mysql数据库
-	 * @author 吴帅
-	 * @parameter @throws Exception
-	 * @createDate 2015年12月18日 下午4:12:05
-	 */
-	@Test
-	public void t4() throws Exception {
-//		BusLogMapper busLogMapper = sqlSession.getMapper(BusLogMapper.class);
-//
-//		List<BusLog> busLogs = new ArrayList<BusLog>();
-//		for(int i=0;i<3;i++){
-//			BusLog busLog = new BusLog();
-//			busLog.setBusId("30001");
-//			busLog.setOperatorId("000001");
-//			busLog.setContent("批量"+i);
-//			busLog.setDoneDate(new Date());
-//			busLog.setResult("S");
-//			busLog.setState("U");
-//			if(i%2==0){
-//				busLog.setRemark("ok");
-//			}
-//			busLogs.add(busLog);
-//		}
-//		busLogMapper.insertBatch(busLogs);
-		sqlSession.commit();
-	}
+
+
+
+
+
 
 }

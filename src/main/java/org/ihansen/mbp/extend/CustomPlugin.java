@@ -28,9 +28,9 @@ import org.mybatis.generator.api.dom.xml.XmlElement;
 import org.mybatis.generator.config.TableConfiguration;
 
 /**
- * .支持oracle/mysql数据库分页查询<br/>
- * .支持oracle/mysql数据库插入时自增主键<br/>
- * .支持oracle/mysql数据库批量插入<br/>
+ * .支持oracle/mysql/sqlserver数据库分页查询<br/>
+ * .支持oracle/mysql/sqlserver数据库插入时自增主键<br/>
+ * .支持oracle/mysql/sqlserver数据库批量插入<br/>
  * 
  * @author 吴帅
  * @CreationDate 2015年8月2日

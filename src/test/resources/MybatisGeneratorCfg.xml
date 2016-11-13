@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 
     <properties resource="dbcpconfig.properties"/>
 
-    <context id="oracel_tables" targetRuntime="MyBatis3">
+    <context id="mbp_tables" targetRuntime="MyBatis3">
         <!-- 自定义序列化 -->
         <plugin type="org.ihansen.mbp.extend.CustomSerializablePlugin"></plugin>
 
@@ -17,10 +17,10 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         </plugin>
 
         <!-- 自定义Example类文件名字 -->
-        <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+       <!-- <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
             <property name="searchString" value="Example$"/>
             <property name="replaceString" value="EX"/>
-        </plugin>
+        </plugin>-->
 
         <!-- 注释控制 -->
         <commentGenerator>
@@ -34,7 +34,7 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
                         password="${db6.jdbc.password}"/>
 
 
-        <!-- 使用于Oracle自定义类型转换 -->
+        <!-- 用于数据库字段类型自定义转换 -->
         <javaTypeResolver type="org.ihansen.mbp.extend.CustJavaTypeResolver">
             <!-- 属性可以控制是否强制DECIMAL和NUMERIC类型的字段转换为Java类型的java.math.BigDecimal,默认值为false -->
             <property name="forceBigDecimals" value="false"/>
@@ -71,7 +71,7 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
             <property name="selectByExampleQueryId" value="true"/>
         </table>
 
-        <table tableName="test_name" domainObjectName="Name"></table>
+        <table tableName="test_name" domainObjectName="Name" incrementField="id"></table>
 
 
 

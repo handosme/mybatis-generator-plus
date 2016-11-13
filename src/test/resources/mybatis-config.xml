@@ -21,6 +21,6 @@
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="org/ihansen/mbp/demo/mapperxml/*.xml"/>
+		<mapper resource="demo/mapperxml/UserMapper.xml"/>
 	</mappers>
 </configuration> 

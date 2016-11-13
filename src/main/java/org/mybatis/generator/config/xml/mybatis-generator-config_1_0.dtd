@@ -144,6 +144,7 @@
   catalog CDATA #IMPLIED
   schema CDATA #IMPLIED
   tableName CDATA #REQUIRED
+  incrementField CDATA #IMPLIED
   alias CDATA #IMPLIED
   domainObjectName CDATA #IMPLIED
   enableInsert CDATA #IMPLIED

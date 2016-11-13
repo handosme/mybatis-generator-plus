@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class User implements Serializable {
-    private Integer id;
+    private Long id;
 
     private String userName;
 
@@ -16,11 +16,11 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -69,7 +69,7 @@ public class User implements Serializable {
     }
 
     public static class Builder {
-        private Integer id;
+        private Long id;
 
         private String userName;
 
@@ -79,7 +79,7 @@ public class User implements Serializable {
 
         private Date updateTime;
 
-        public Builder id(Integer id) {
+        public Builder id(Long id) {
             this.id = id;
             return this;
         }
