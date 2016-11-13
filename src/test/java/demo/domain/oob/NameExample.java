@@ -1,4 +1,4 @@
-package demo.domain;
+package demo.domain.oob;
 
 import java.io.Serializable;
 import java.util.ArrayList;

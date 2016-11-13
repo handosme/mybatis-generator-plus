@@ -1,7 +1,7 @@
-package demo.mapper;
+package demo.mapper.ooc;
 
-import demo.domain.User;
-import demo.domain.UserExample;
+import demo.domain.ooc.User;
+import demo.domain.ooc.UserExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

@@ -1,7 +1,7 @@
-package demo.mapper;
+package demo.mapper.oob;
 
-import demo.domain.Name;
-import demo.domain.NameExample;
+import demo.domain.oob.Name;
+import demo.domain.oob.NameExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

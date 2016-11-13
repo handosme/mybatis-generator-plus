@@ -1,75 +1,23 @@
 # MBP(mybatis generator plus)
-基于mybatis generator core v.1.3.2 源码的扩展，增加一些特性 
-dmeo程序入口: [demo.MBPMain.main](href="https://github.com/handosme/mybatis-generator-core/blob/master/src/main/java/org/ihansen/mybatis/generator/MainClass.java)  
+基于mybatis generator core v.1.3.2 源码的扩展，增加一些特性.  
+### 功能特性:  
+* 修改org.mybatis.generator.api.dom.java.Interface类，新增private List<Field> fields字段，用于让Mapper接口支持静态常量成员;  
+* 扩展Mybatis-Generator，自动生成支持Oracle、Mysql、Sqlserver分页查询和批量插入操作的自动代码，支持从Mapper接口读取数据源名称;  
+* 支持oracle使用SEQUENCE实现自增主键:  
+> 需要事先建立好表主键对应的SEQUENCE,并且SEQUENCE的名称作出了要求:格式为table_name_SEQUENCE
+* Model类支持Builder模式创建,如下代码:
 ```java
-    public static final String CFG_FILE_PATH = MBPMain.class.getResource("/MybatisGeneratorCfg.xml").getFile();
+User user = new User.Builder()
+				.userName("insert_test")
+				.creatTime(new Date())
+				.updateTime(new Date())
+				.build();
+```  
 
-	public static void main(String[] args) {
-		List<String> warnings = new ArrayList<>();
-		boolean overwrite = true;
-		File configFile = new File(CFG_FILE_PATH);
-		ConfigurationParser cp = new ConfigurationParser(warnings);
-		Configuration config = null;
-		try {
-			config = cp.parseConfiguration(configFile);
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-		catch (XMLParserException e) {
-			e.printStackTrace();
-		}
-		DefaultShellCallback callback = new DefaultShellCallback(overwrite);
-		MyBatisGenerator myBatisGenerator = null;
-		try {
-			myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
-		}
-		catch (InvalidConfigurationException e) {
-			e.printStackTrace();
-		}
-		try {
-			myBatisGenerator.generate(new ProgressCallback() {
-				@Override
-				public void startTask(String taskName) {
-					System.out.println("startTask(String "+taskName+")");
-				}
-				@Override
-				public void saveStarted(int totalTasks) {
-					System.out.println("saveStarted(int "+totalTasks+")");
-				}
-				@Override
-				public void introspectionStarted(int totalTasks) {
-					System.out.println("introspectionStarted(int "+totalTasks+")");
-				}
-				@Override
-				public void generationStarted(int totalTasks) {
-					System.out.println("generationStarted(int "+totalTasks+")");
-				}
-				@Override
-				public void done() {
-					System.out.println("done()");
-				}
-				@Override
-				public void checkCancel() throws InterruptedException {
-					System.out.println("checkCancel()");
-				}
-			});
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-		catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-	
-```
-
-
-MBP配置文件参考: [MybatisGeneratorCfg.xml](https://github.com/handosme/mybatis-generator-core/blob/master/src/main/resources/MybatisGeneratorCfg.xml")  
+### dmeo程序入口: 
+[demo.MBPMain.main](https://github.com/handosme/mybatis-generator-plus/blob/master/src/test/java/demo/MBPMain.java)  
+### MBP配置文件参考: 
+[MybatisGeneratorCfg.xml](https://github.com/handosme/mybatis-generator-plus/blob/master/src/test/resources/MybatisGeneratorCfg.xml)  
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -149,10 +97,7 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 ```
 
 
-#### 功能特性:  
-* 修改org.mybatis.generator.api.dom.java.Interface类，新增private List<Field> fields字段，用于让Mapper接口支持静态常量成员;  
-* 扩展Mybatis-Generator，自动生成支持Oracle、Mysql、Sqlserver分页查询和批量插入操作的自动代码，支持从Mapper接口读取数据源名称;  
-* Model类支持Builder模式创建;  
+
 
 
 

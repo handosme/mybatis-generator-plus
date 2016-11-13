@@ -13,6 +13,7 @@ import org.ihansen.mbp.extend.dbSupport.MysqlSupport;
 import org.ihansen.mbp.extend.dbSupport.OracleSupport;
 import org.ihansen.mbp.extend.dbSupport.SqlServerSupport;
 import org.mybatis.generator.api.CommentGenerator;
+import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
 import org.mybatis.generator.api.dom.java.Field;
@@ -39,8 +40,7 @@ import org.mybatis.generator.config.TableConfiguration;
 public class CustomPlugin extends PluginAdapter {
 	private String pageHelperClass;
 	private String dbType;
-
-	private DBSupport supportPlugin;
+	private DBSupport dbSupport;
 
 	/**
 	 * 修改Model类
@@ -132,19 +132,19 @@ public class CustomPlugin extends PluginAdapter {
 	 */
 	@Override
 	public boolean sqlMapDocumentGenerated(Document document, IntrospectedTable introspectedTable) {
-		supportPlugin.sqlDialect(document, introspectedTable);
+		dbSupport.sqlDialect(document, introspectedTable);
 		return super.sqlMapDocumentGenerated(document, introspectedTable);
 	}
 
 	@Override
 	public boolean sqlMapSelectByExampleWithoutBLOBsElementGenerated(XmlElement element, IntrospectedTable introspectedTable) {
-		XmlElement newElement = supportPlugin.adaptSelectByExample(element, introspectedTable);
+		XmlElement newElement = dbSupport.adaptSelectByExample(element, introspectedTable);
 		return super.sqlMapUpdateByExampleWithoutBLOBsElementGenerated(newElement, introspectedTable);
 	}
 
 	@Override
 	public boolean sqlMapInsertSelectiveElementGenerated(XmlElement element, IntrospectedTable introspectedTable) {
-		supportPlugin.adaptInsertSelective(element, introspectedTable);
+		dbSupport.adaptInsertSelective(element, introspectedTable);
 		return super.sqlMapInsertSelectiveElementGenerated(element, introspectedTable);
 	}
 
@@ -161,13 +161,13 @@ public class CustomPlugin extends PluginAdapter {
 		if (valid1 && valid2) {
 			dbType = dbType.toUpperCase();// 忽略大小写
 			if (dbType.equals("ORACLE")) {
-				supportPlugin = new OracleSupport();
+				dbSupport = new OracleSupport();
 			}
 			else if (dbType.equals("MYSQL")) {
-				supportPlugin = new MysqlSupport();
+				dbSupport = new MysqlSupport();
 			}
 			else if (dbType.equals("SQLSERVER")) {
-				supportPlugin = new SqlServerSupport();
+				dbSupport = new SqlServerSupport();
 			}
 			else{// 不支持其他数据库
 				valid2 = false;

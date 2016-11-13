@@ -21,6 +21,6 @@
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="demo/mapperxml/UserMapper.xml"/>
+		<mapper resource="demo/mapperxml/ooc/UserMapper.xml"/>
 	</mappers>
 </configuration> 

@@ -208,7 +208,7 @@ public class SqlServerSupport implements DBSupport {
 	}
 
 	/**
-	 * 在xml的插入配置增加查询序列配置
+	 * 只插入设置过的字段值,sqlserver空实现即可
 	 * 
 	 * @author 吴帅
 	 * @parameter @param element

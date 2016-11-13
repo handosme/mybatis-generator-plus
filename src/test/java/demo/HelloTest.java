@@ -1,9 +1,10 @@
 package demo;
 
 
-import demo.domain.User;
-import demo.domain.UserExample;
-import demo.mapper.UserMapper;
+
+import demo.domain.ooc.User;
+import demo.domain.ooc.UserExample;
+import demo.mapper.ooc.UserMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -23,7 +24,7 @@ public class HelloTest {
 	SqlSession sqlSession;
 
 	UserMapper userMapper;
-	
+
 	@Before
 	public void before() throws FileNotFoundException {
 		// Mapper的配置文件
@@ -45,14 +46,14 @@ public class HelloTest {
 	@Test
 	public void insertTest() throws Exception {
 		User user = new User.Builder()
-				.userName("insert_testzzzzzz")
+				.userName("insert_test")
 				.creatTime(new Date())
 				.updateTime(new Date())
 				.build();
 		userMapper.insertSelective(user);
 		sqlSession.commit();
 	}
-	
+
 	/**
 	 * insertBatch Test
 	 * @author 吴帅
@@ -97,7 +98,7 @@ public class HelloTest {
 		UserExample userExample = new UserExample();
 		userExample.createCriteria().andUserNameLike("%test%");
 
-		PageHelper pageHelper = new PageHelper(0,19);
+		PageHelper pageHelper = new PageHelper(0,10);
 		userExample.setPageHelper(pageHelper);
 		List<User> userList = userMapper.selectByExample(userExample);
 		//TODO verify

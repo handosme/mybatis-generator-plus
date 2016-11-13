@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="demo.mapper.UserMapper" >
-  <resultMap id="BaseResultMap" type="demo.domain.User" >
+<mapper namespace="demo.mapper.oob.NameMapper" >
+  <resultMap id="BaseResultMap" type="demo.domain.oob.Name" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="creat_time" property="creatTime" jdbcType="TIMESTAMP" />
     <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
@@ -67,15 +67,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, user_name, creat_time, is_deleted, update_time
+    id, name, creat_time, is_deleted, update_time
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="demo.domain.UserExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="demo.domain.oob.NameExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from test_user
+    from test_name
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,33 +87,33 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from test_user
+    from test_name
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from test_user
+    delete from test_name
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="demo.domain.UserExample" >
-    delete from test_user
+  <delete id="deleteByExample" parameterType="demo.domain.oob.NameExample" >
+    delete from test_name
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="demo.domain.User" >
-    insert into test_user (id, user_name, creat_time, 
+  <insert id="insert" parameterType="demo.domain.oob.Name" >
+    insert into test_name (id, name, creat_time, 
       is_deleted, update_time)
-    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{creatTime,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{creatTime,jdbcType=TIMESTAMP}, 
       #{isDeleted,jdbcType=TINYINT}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="demo.domain.User" >
-    insert into test_user
+  <insert id="insertSelective" parameterType="demo.domain.oob.Name" >
+    insert into test_name
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="userName != null" >
-        user_name,
+      <if test="name != null" >
+        name,
       </if>
       <if test="creatTime != null" >
         creat_time,
@@ -129,8 +129,8 @@
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="userName != null" >
-        #{userName,jdbcType=VARCHAR},
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
       </if>
       <if test="creatTime != null" >
         #{creatTime,jdbcType=TIMESTAMP},
@@ -143,20 +143,20 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="demo.domain.UserExample" resultType="java.lang.Integer" >
-    select count(*) from test_user
+  <select id="countByExample" parameterType="demo.domain.oob.NameExample" resultType="java.lang.Integer" >
+    select count(*) from test_name
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update test_user
+    update test_name
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.userName != null" >
-        user_name = #{record.userName,jdbcType=VARCHAR},
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
       </if>
       <if test="record.creatTime != null" >
         creat_time = #{record.creatTime,jdbcType=TIMESTAMP},
@@ -173,9 +173,9 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update test_user
+    update test_name
     set id = #{record.id,jdbcType=INTEGER},
-      user_name = #{record.userName,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
       creat_time = #{record.creatTime,jdbcType=TIMESTAMP},
       is_deleted = #{record.isDeleted,jdbcType=TINYINT},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
@@ -183,11 +183,11 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="demo.domain.User" >
-    update test_user
+  <update id="updateByPrimaryKeySelective" parameterType="demo.domain.oob.Name" >
+    update test_name
     <set >
-      <if test="userName != null" >
-        user_name = #{userName,jdbcType=VARCHAR},
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="creatTime != null" >
         creat_time = #{creatTime,jdbcType=TIMESTAMP},
@@ -201,9 +201,9 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="demo.domain.User" >
-    update test_user
-    set user_name = #{userName,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="demo.domain.oob.Name" >
+    update test_name
+    set name = #{name,jdbcType=VARCHAR},
       creat_time = #{creatTime,jdbcType=TIMESTAMP},
       is_deleted = #{isDeleted,jdbcType=TINYINT},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
@@ -214,16 +214,16 @@
       <![CDATA[ limit #{pageHelper.begin}, #{pageHelper.length}]]>
     </if>
   </sql>
-  <insert id="insertBatch" parameterType="demo.domain.User" >
-    insert into test_user
+  <insert id="insertBatch" parameterType="demo.domain.oob.Name" >
+    insert into test_name
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      user_name,creat_time,is_deleted,update_time,
+      id,name,creat_time,is_deleted,update_time,
     </trim>
     values
     <foreach collection="list" index="index" item="item" separator="," >
       (
       <trim suffixOverrides="," >
-        #{item.userName,jdbcType=VARCHAR},#{item.creatTime,jdbcType=TIMESTAMP},#{item.isDeleted,jdbcType=TINYINT},#{item.updateTime,jdbcType=TIMESTAMP},
+        #{item.id,jdbcType=INTEGER},#{item.name,jdbcType=VARCHAR},#{item.creatTime,jdbcType=TIMESTAMP},#{item.isDeleted,jdbcType=TINYINT},#{item.updateTime,jdbcType=TIMESTAMP},
       </trim>
       )
     </foreach>

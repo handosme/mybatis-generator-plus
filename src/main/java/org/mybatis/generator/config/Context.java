@@ -502,6 +502,20 @@ public class Context extends PropertyHolder {
 
 		generatedJavaFiles.addAll(pluginAggregator.contextGenerateAdditionalJavaFiles());
 		generatedXmlFiles.addAll(pluginAggregator.contextGenerateAdditionalXmlFiles());
+
+
+		//每个表自定义包路径
+		setJavaFilesCustomTargetPackage(generatedJavaFiles);
+		setXmlFilesCustomTargetPackage(generatedJavaFiles);
+	}
+
+	private void setJavaFilesCustomTargetPackage(List<GeneratedJavaFile> generatedJavaFiles) {
+		for (GeneratedJavaFile generatedJavaFile : generatedJavaFiles) {
+		}
+	}
+
+	private void setXmlFilesCustomTargetPackage(List<GeneratedJavaFile> generatedJavaFiles) {
+
 	}
 
 	private Connection getConnection() throws SQLException {
@@ -525,4 +539,7 @@ public class Context extends PropertyHolder {
 	public boolean autoDelimitKeywords() {
 		return autoDelimitKeywords != null && autoDelimitKeywords.booleanValue();
 	}
+
+
+
 }
