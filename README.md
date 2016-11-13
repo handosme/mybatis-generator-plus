@@ -26,7 +26,7 @@ User user = new User.Builder()
 本工具的使用方式和原生的MyBatis Generator使用方式一致,兼容原生版本,但是由于本工具还未提交到主流的mvn中央仓库,所以暂时提供在线下载的方式提供相关jar包:
 #### v.1.3.2-plus  
 v.1.3.2-plus jar file 下载地址:[mbp.jar](http://static-ali.ihansen.org/jar/mbp/1.3.2-plus/mbp.jar)       
-v.1.3.2-plus sources file下载地址:[mbp-sources.jar](http://static-ali.ihansen.org/jar/mbp/1.3.2-plus/mbp-sources.jar)
+v.1.3.2-plus sources file下载地址:[mbp-sources.jar](http://static-ali.ihansen.org/jar/mbp/1.3.2-plus/mbp-sources.jar)  
 将jar安装到本地仓库的方式:
 ```
 mvn install:install-file  -Dfile=/Users/user/download/mbp.jar  -DgroupId=org.ihansen.mbp  -DartifactId=mybatis-generator-plus -Dversion=1.3.2-plus -Dpackaging=jar
