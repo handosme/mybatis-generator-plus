@@ -2,7 +2,6 @@
 基于mybatis generator core v.1.3.2 源码的扩展，增加一些特性 
 dmeo程序入口: [demo.MBPMain.main](href="https://github.com/handosme/mybatis-generator-core/blob/master/src/main/java/org/ihansen/mybatis/generator/MainClass.java)  
 ```java
-
     public static final String CFG_FILE_PATH = MBPMain.class.getResource("/MybatisGeneratorCfg.xml").getFile();
 
 	public static void main(String[] args) {
@@ -150,7 +149,7 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 ```
 
 
-#### v1.0特性:  
+#### 功能特性:  
 * 修改org.mybatis.generator.api.dom.java.Interface类，新增private List<Field> fields字段，用于让Mapper接口支持静态常量成员;  
 * 扩展Mybatis-Generator，自动生成支持Oracle、Mysql、Sqlserver分页查询和批量插入操作的自动代码，支持从Mapper接口读取数据源名称;  
 * Model类支持Builder模式创建;  
