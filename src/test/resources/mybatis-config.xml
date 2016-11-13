@@ -3,7 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Config 3.0//EN"   
     "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	<properties resource="dbcpconfig.properties" />
+	<properties resource="dbconfig.properties" />
 	<settings>
 		<setting name="cacheEnabled" value="false" />
 		<setting name="useGeneratedKeys" value="true" />

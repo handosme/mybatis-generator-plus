@@ -50,7 +50,7 @@ public class PageHelper implements Serializable
 	/**
 	 * @param begin
 	 * @param length
-	 * @param count
+	 * @param totalRecords
 	 */
 	public PageHelper(int begin, int length, int totalRecords)
 	{

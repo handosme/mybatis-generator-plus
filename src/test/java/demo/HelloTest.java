@@ -7,6 +7,7 @@ import demo.mapper.UserMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.ihansen.mbp.extend.PageHelper;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -82,6 +83,22 @@ public class HelloTest {
 	public void selectTest() throws Exception {
 		UserExample userExample = new UserExample();
 		userExample.createCriteria().andUserNameLike("%0%");
+		List<User> userList = userMapper.selectByExample(userExample);
+		//TODO verify
+		System.out.println(userList);
+	}
+
+	/**
+	 * select page Test
+	 * @throws Exception
+	 */
+	@Test
+	public void selectPageTest() throws Exception {
+		UserExample userExample = new UserExample();
+		userExample.createCriteria().andUserNameLike("%test%");
+
+		PageHelper pageHelper = new PageHelper(0,19);
+		userExample.setPageHelper(pageHelper);
 		List<User> userList = userMapper.selectByExample(userExample);
 		//TODO verify
 		System.out.println(userList);
