@@ -60,7 +60,7 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 
         <!-- 要对那些数据表进行生成操作，必须要有一个 -->
         <table tableName="test_user" domainObjectName="User">
-            <!-- 自定义属性配置：设置此属性表示该字段自增 -->
+            <!-- 自定义属性配置：设置此属性表示该字段自增,默认值为id -->
             <property name="incrementField" value="id"/>
             <!-- 自定义属性配置：对应的数据源名称 -->
             <property name="dataSourceName" value="db6"/>
@@ -70,5 +70,13 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
             <property name="enableSelectByExample" value="true"/>
             <property name="selectByExampleQueryId" value="true"/>
         </table>
+
+        <table tableName="test_name" domainObjectName="Name"></table>
+
+
+
+
+
+
     </context>
 </generatorConfiguration>
