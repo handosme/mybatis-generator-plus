@@ -13,7 +13,7 @@ MBP(Mybatis Generator Plus)基于mybatis generator core v.1.3.2 源码扩展，�
 
 > 需要事先建立好表主键对应的SEQUENCE,并且SEQUENCE的名称作出了要求:格式为table_name_SEQUENCE   
 
-* Model类支持Builder模式创建,如下代码:
+* Model类支持Builder模式创建,示例代码:
 ```java
 User user = new User.Builder()
 				.userName("insert_test")
