@@ -37,6 +37,7 @@ mvn install:install-file  -Dfile=/Users/user/download/mbp.jar  -DgroupId=org.iha
     <groupId>org.ihansen.mbp</groupId>
     <artifactId>mybatis-generator-plus</artifactId>
     <version>1.3.2-plus</version>
+    <scope>test</scope>
 </dependency>
 ```
   
