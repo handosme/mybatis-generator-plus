@@ -60,7 +60,7 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 
     <properties resource="dbcpconfig.properties"/>
 
-    <context id="oracel_tables" targetRuntime="MyBatis3">
+    <context id="mbp_tables" targetRuntime="MyBatis3">
         <!-- 自定义序列化 -->
         <plugin type="org.ihansen.mbp.extend.CustomSerializablePlugin"></plugin>
 
