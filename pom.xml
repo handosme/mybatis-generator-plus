@@ -94,7 +94,7 @@
 				</configuration>
 				<executions>
 					<execution>
-						<phase>package</phase><!-- 在install命令时执行 -->
+						<phase>package</phase><!-- 在package命令时执行 -->
 						<goals>
 							<goal>jar</goal>
 						</goals>
