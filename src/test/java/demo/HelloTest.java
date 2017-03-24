@@ -2,8 +2,11 @@ package demo;
 
 
 
+import demo.domain.oob.OperateLog;
+import demo.domain.oob.OperateLogExample;
 import demo.domain.ooc.User;
 import demo.domain.ooc.UserExample;
+import demo.mapper.oob.OperateLogMapper;
 import demo.mapper.ooc.UserMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -25,6 +28,8 @@ public class HelloTest {
 
 	UserMapper userMapper;
 
+	OperateLogMapper operateLogMapper;
+
 	@Before
 	public void before() throws FileNotFoundException {
 		// Mapper的配置文件
@@ -35,6 +40,7 @@ public class HelloTest {
 		SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(is);
 		sqlSession = sessionFactory.openSession();
 		userMapper = sqlSession.getMapper(UserMapper.class);
+		operateLogMapper = sqlSession.getMapper(OperateLogMapper.class);
 	}
 
 	/**
@@ -89,24 +95,19 @@ public class HelloTest {
 		System.out.println(userList);
 	}
 
+
 	/**
 	 * select page Test
 	 * @throws Exception
 	 */
 	@Test
 	public void selectPageTest() throws Exception {
-		UserExample userExample = new UserExample();
-		userExample.createCriteria().andUserNameLike("%test%");
-
-		PageHelper pageHelper = new PageHelper(0,10);
-		userExample.setPageHelper(pageHelper);
-		List<User> userList = userMapper.selectByExample(userExample);
+		OperateLogExample relationshipsExample = new OperateLogExample();
+		relationshipsExample.setPagination(0l,2l);
+		List<OperateLog> operateLogList = operateLogMapper.selectByExample(relationshipsExample);
 		//TODO verify
-		System.out.println(userList);
+		System.out.println(operateLogList);
 	}
-
-
-
 
 
 

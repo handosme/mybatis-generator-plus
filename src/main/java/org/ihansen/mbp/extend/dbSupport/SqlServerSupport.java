@@ -27,7 +27,7 @@ public class SqlServerSupport implements DBSupport {
         XmlElement paginationPrefixElement = new XmlElement("sql");
         paginationPrefixElement.addAttribute(new Attribute("id", "SqlServerDialectPrefix"));
         XmlElement prefixIf = new XmlElement("if");
-        prefixIf.addAttribute(new Attribute("test", "pageHelper != null"));
+        prefixIf.addAttribute(new Attribute("test", "offset != null and end != null"));
         prefixIf.addElement(new TextElement("SELECT *FROM ("));
         paginationPrefixElement.addElement(prefixIf);
         parentElement.addElement(paginationPrefixElement);
@@ -36,8 +36,8 @@ public class SqlServerSupport implements DBSupport {
         XmlElement paginationSuffixElement = new XmlElement("sql");
         paginationSuffixElement.addAttribute(new Attribute("id", "SqlServerDialectSuffix"));
         XmlElement suffixIf = new XmlElement("if");
-        suffixIf.addAttribute(new Attribute("test", "pageHelper != null"));
-        suffixIf.addElement(new TextElement("<![CDATA[) _pagination_tab WHERE _pagination_rownumber >=#{pageHelper.begin} and _pagination_rownumber < #{pageHelper.end}]]>"));
+        suffixIf.addAttribute(new Attribute("test", "offset != null and end != null"));
+        suffixIf.addElement(new TextElement("<![CDATA[) _pagination_tab WHERE _pagination_rownumber >=#{offset} and _pagination_rownumber < #{end}]]>"));
         paginationSuffixElement.addElement(suffixIf);
         parentElement.addElement(paginationSuffixElement);
 

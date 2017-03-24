@@ -13,7 +13,6 @@ import org.ihansen.mbp.extend.dbSupport.MysqlSupport;
 import org.ihansen.mbp.extend.dbSupport.OracleSupport;
 import org.ihansen.mbp.extend.dbSupport.SqlServerSupport;
 import org.mybatis.generator.api.CommentGenerator;
-import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
 import org.mybatis.generator.api.dom.java.Field;
@@ -38,7 +37,6 @@ import org.mybatis.generator.config.TableConfiguration;
  * @version 1.0
  */
 public class CustomPlugin extends PluginAdapter {
-	private String pageHelperClass;
 	private String dbType;
 	private DBSupport dbSupport;
 
@@ -109,7 +107,7 @@ public class CustomPlugin extends PluginAdapter {
 	 */
 	@Override
 	public boolean modelExampleClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) { 
-		addPage(topLevelClass, introspectedTable, "pageHelper");
+		addPage(topLevelClass, introspectedTable);
 		return super.modelExampleClassGenerated(topLevelClass, introspectedTable);
 	}
 
@@ -153,12 +151,11 @@ public class CustomPlugin extends PluginAdapter {
 	 */
 	@Override
 	public boolean validate(List<String> warnings) {
-		pageHelperClass = properties.getProperty("pageHelperClass"); //$NON-NLS-1$
+
 		dbType = properties.getProperty("dbType"); //$NON-NLS-1$
 
-		boolean valid1 = stringHasValue(pageHelperClass);
-		boolean valid2 = stringHasValue(dbType);
-		if (valid1 && valid2) {
+		boolean valid1 = stringHasValue(dbType);
+		if (valid1) {
 			dbType = dbType.toUpperCase();// 忽略大小写
 			if (dbType.equals("ORACLE")) {
 				dbSupport = new OracleSupport();
@@ -170,22 +167,19 @@ public class CustomPlugin extends PluginAdapter {
 				dbSupport = new SqlServerSupport();
 			}
 			else{// 不支持其他数据库
-				valid2 = false;
+				valid1 = false;
 				warnings.add(getString("RuntimeError.18", "RenameExampleClassPlugin", "searchString"));
 			}
-			Pattern.compile(pageHelperClass);
 			Pattern.compile(dbType);
 		}
 		else {
-			if (!stringHasValue(pageHelperClass)) {
-				warnings.add(getString("ValidationError.18", "RenameExampleClassPlugin", "searchString")); //$NON-NLS-1$
-			}
+
 			if (!stringHasValue(dbType)) {
 				warnings.add(getString("ValidationError.18", "RenameExampleClassPlugin", "searchString")); //$NON-NLS-1$
 			}
 		}
 
-		return (valid1 && valid2);
+		return (valid1);
 	}
 
 	/**
@@ -230,36 +224,48 @@ public class CustomPlugin extends PluginAdapter {
 		interfaze.addMethod(ibsmethod);
 	}
 
+
 	/**
 	 * 修改Example类,添加分页支持
-	 * 
+	 *
 	 * @param topLevelClass
 	 * @param introspectedTable
-	 * @param name
 	 */
-	private void addPage(TopLevelClass topLevelClass, IntrospectedTable introspectedTable, String name) {
-		topLevelClass.addImportedType(new FullyQualifiedJavaType(pageHelperClass));
+	private void addPage(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
 		CommentGenerator commentGenerator = context.getCommentGenerator();
-		Field field = new Field();
-		field.setVisibility(JavaVisibility.PROTECTED);
-		field.setType(new FullyQualifiedJavaType(pageHelperClass));
-		field.setName(name);
-		commentGenerator.addFieldComment(field, introspectedTable);
-		topLevelClass.addField(field);
-		char c = name.charAt(0);
-		String camel = Character.toUpperCase(c) + name.substring(1);
+		//.add offset Field
+		Field offsetField = new Field();
+		offsetField.setVisibility(JavaVisibility.PROTECTED);
+		offsetField.setType(new FullyQualifiedJavaType("java.lang.Long"));
+		offsetField.setName("offset");
+		commentGenerator.addFieldComment(offsetField, introspectedTable);
+		topLevelClass.addField(offsetField);
+
+		//.add limit Field
+		Field limitField = new Field();
+		limitField.setVisibility(JavaVisibility.PROTECTED);
+		limitField.setType(new FullyQualifiedJavaType("java.lang.Long"));
+		limitField.setName("limit");
+		commentGenerator.addFieldComment(limitField, introspectedTable);
+		topLevelClass.addField(limitField);
+
+		//.add end Field
+		Field endField = new Field();
+		endField.setVisibility(JavaVisibility.PROTECTED);
+		endField.setType(new FullyQualifiedJavaType("java.lang.Long"));
+		endField.setName("end");
+		commentGenerator.addFieldComment(endField, introspectedTable);
+		topLevelClass.addField(endField);
+
+		//.add setPagination method
 		Method method = new Method();
 		method.setVisibility(JavaVisibility.PUBLIC);
-		method.setName("set" + camel);
-		method.addParameter(new Parameter(new FullyQualifiedJavaType(pageHelperClass), name));
-		method.addBodyLine("this." + name + "=" + name + ";");
-		commentGenerator.addGeneralMethodComment(method, introspectedTable);
-		topLevelClass.addMethod(method);
-		method = new Method();
-		method.setVisibility(JavaVisibility.PUBLIC);
-		method.setReturnType(new FullyQualifiedJavaType(pageHelperClass));
-		method.setName("get" + camel);
-		method.addBodyLine("return " + name + ";");
+		method.setName("setPagination");
+		method.addParameter(new Parameter(new FullyQualifiedJavaType("long"), "offset"));
+		method.addParameter(new Parameter(new FullyQualifiedJavaType("long"), "limit"));
+		method.addBodyLine("this.offset = offset;");
+		method.addBodyLine("this.limit = limit;");
+		method.addBodyLine("this.end = offset + limit;");
 		commentGenerator.addGeneralMethodComment(method, introspectedTable);
 		topLevelClass.addMethod(method);
 	}

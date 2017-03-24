@@ -26,8 +26,8 @@ public class MysqlSupport implements DBSupport {
         XmlElement paginationSuffixElement = new XmlElement("sql");
         paginationSuffixElement.addAttribute(new Attribute("id", "MysqlDialectSuffix"));
         XmlElement pageEnd = new XmlElement("if");
-        pageEnd.addAttribute(new Attribute("test", "pageHelper != null"));
-        pageEnd.addElement(new TextElement("<![CDATA[ limit #{pageHelper.begin}, #{pageHelper.length}]]>"));
+        pageEnd.addAttribute(new Attribute("test", "offset != null and limit != null"));
+        pageEnd.addElement(new TextElement("<![CDATA[ limit #{offset}, #{limit}]]>"));
         paginationSuffixElement.addElement(pageEnd);
         parentElement.addElement(paginationSuffixElement);
 

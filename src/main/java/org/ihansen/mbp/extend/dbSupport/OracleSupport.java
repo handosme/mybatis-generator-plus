@@ -29,7 +29,7 @@ public class OracleSupport implements DBSupport {
         XmlElement paginationPrefixElement = new XmlElement("sql");
         paginationPrefixElement.addAttribute(new Attribute("id", "OracleDialectPrefix"));
         XmlElement pageStart = new XmlElement("if");
-        pageStart.addAttribute(new Attribute("test", "pageHelper != null"));
+        pageStart.addAttribute(new Attribute("test", "offset != null and end != null"));
         pageStart.addElement(new TextElement("select * from ( select row_.*, rownum rownum_ from ( "));
         paginationPrefixElement.addElement(pageStart);
         parentElement.addElement(paginationPrefixElement);
@@ -38,8 +38,8 @@ public class OracleSupport implements DBSupport {
         XmlElement paginationSuffixElement = new XmlElement("sql");
         paginationSuffixElement.addAttribute(new Attribute("id", "OracleDialectSuffix"));
         XmlElement pageEnd = new XmlElement("if");
-        pageEnd.addAttribute(new Attribute("test", "pageHelper != null"));
-        pageEnd.addElement(new TextElement("<![CDATA[ ) row_  where rownum <= #{pageHelper.end} ) where rownum_ > #{pageHelper.begin}  ]]>"));
+        pageEnd.addAttribute(new Attribute("test", "offset != null and end != null"));
+        pageEnd.addElement(new TextElement("<![CDATA[ ) row_  where rownum <= #{end} ) where rownum_ > #{offset}]]>"));
         paginationSuffixElement.addElement(pageEnd);
         parentElement.addElement(paginationSuffixElement);
 

@@ -12,14 +12,11 @@ MBP(Mybatis Generator Plus)基于mybatis generator core v.1.3.2 源码扩展，�
 ```java
 @Test
 public void selectPageTest() throws Exception {
-	UserExample userExample = new UserExample();
-	userExample.createCriteria().andUserNameLike("%test%");
-	
-	PageHelper pageHelper = new PageHelper(0,10);
-	userExample.setPageHelper(pageHelper);
-	List<User> userList = userMapper.selectByExample(userExample);
-	//TODO verify
-	System.out.println(userList);
+	OperateLogExample relationshipsExample = new OperateLogExample();
+    relationshipsExample.setPagination(0l,10l);
+    List<OperateLog> operateLogList = operateLogMapper.selectByExample(relationshipsExample);
+    //TODO verify
+    System.out.println(operateLogList);
 }
 ```
 * 支持oracle使用SEQUENCE实现自增主键:  
@@ -81,7 +78,6 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 
         <!-- oracle/mysql/sqlserver方言插件 -->
         <plugin type="org.ihansen.mbp.extend.CustomPlugin">
-            <property name="pageHelperClass" value="org.ihansen.mbp.extend.PageHelper"/>
             <property name="dbType" value="MYSQL"/>
         </plugin>
 
@@ -98,9 +94,10 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         </commentGenerator>
 
         <!-- 数据库连接 -->
-        <jdbcConnection driverClass="${mysql.jdbc.driver}"
-                        connectionURL="${db6.jdbc.url}" userId="${db6.jdbc.username}"
-                        password="${db6.jdbc.password}"/>
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://xxx.xxx.xxx.xxx:3306/dbname?characterEncoding=utf-8" 
+                        userId="username"
+                        password="password"/>
 
 
         <!-- 使用于Oracle自定义类型转换 -->

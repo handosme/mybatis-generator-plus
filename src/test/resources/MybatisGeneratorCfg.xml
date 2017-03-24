@@ -12,12 +12,11 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 
         <!-- oracle/mysql/sqlserver方言插件 -->
         <plugin type="org.ihansen.mbp.extend.CustomPlugin">
-            <property name="pageHelperClass" value="org.ihansen.mbp.extend.PageHelper"/>
             <property name="dbType" value="MYSQL"/>
         </plugin>
 
         <!-- 自定义Example类文件名字 -->
-       <!-- <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+        <!-- <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
             <property name="searchString" value="Example$"/>
             <property name="replaceString" value="EX"/>
         </plugin>-->
