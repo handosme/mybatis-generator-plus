@@ -35,7 +35,7 @@ User user = new User.Builder()
 				.build();
 ```  
 
-### 使用方式:
+### 使用方式一：添加jar到本地仓库:
 本工具的使用方式和原生的MyBatis Generator使用方式一致,兼容原生版本,但是由于本工具还未提交到主流的mvn中央仓库,所以暂时提供在线下载的方式提供相关jar包:
 #### v.1.3.2-plus  
 v.1.3.2-plus jar file 下载地址:[mbp.jar](http://static-ali.ihansen.org/jar/mbp/1.3.2-plus/mbp.jar)       
@@ -53,15 +53,18 @@ mvn install:install-file  -Dfile=/Users/user/download/mbp.jar  -DgroupId=org.iha
     <scope>test</scope>
 </dependency>
 ```
-  
-  
-
-
-
-
-### 生成文件的dmeo入口: 
+生成文件的dmeo入口: 
 [demo.MBPMain.main](https://github.com/handosme/mybatis-generator-plus/blob/master/src/test/java/demo/MBPMain.java)  
-### 供参考的MBP配置文件: 
+
+
+### 使用方式二：运行可执行jar文件:  
+包含运行依赖包的可独立执行jar文件：mbp-jar-with-dependencies.jar 
+下载地址:[mbp-jar-with-dependencies.jar](http://static-ali.ihansen.org/jar/mbp/1.3.2-plus/mbp-jar-with-dependencies.jar)
+然后使用如下命令执行即可生成自动文件：
+```bash
+java -jar mbp-jar-with-dependencies.jar -configfile MybatisGeneratorCfg.xml -overwrite
+```
+供参考的MBP配置文件: 
 [MybatisGeneratorCfg.xml](https://github.com/handosme/mybatis-generator-plus/blob/master/src/test/resources/MybatisGeneratorCfg.xml)  
 
 ```xml
