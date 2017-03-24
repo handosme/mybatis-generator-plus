@@ -58,9 +58,8 @@ mvn install:install-file  -Dfile=/Users/user/download/mbp.jar  -DgroupId=org.iha
 
 
 ### 使用方式二：运行可执行jar文件:  
-包含运行依赖包的可独立执行jar文件：mbp-jar-with-dependencies.jar 
-下载地址:[mbp-jar-with-dependencies.jar](http://static-ali.ihansen.org/jar/mbp/1.3.2-plus/mbp-jar-with-dependencies.jar)
-然后使用如下命令执行即可生成自动文件：
+包含运行依赖包的可独立执行jar文件：[mbp-jar-with-dependencies.jar](http://static-ali.ihansen.org/jar/mbp/1.3.2-plus/mbp-jar-with-dependencies.jar)  
+使用如下命令执行即可生成自动文件：
 ```bash
 java -jar mbp-jar-with-dependencies.jar -configfile MybatisGeneratorCfg.xml -overwrite
 ```
