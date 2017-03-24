@@ -13,7 +13,7 @@ MBP(Mybatis Generator Plus)基于mybatis generator core v.1.3.2 源码扩展，�
 @Test
 public void selectPageTest() throws Exception {
 	OperateLogExample relationshipsExample = new OperateLogExample();
-    relationshipsExample.setPagination(0l,10l);
+    relationshipsExample.setPagination(0L,10L);
     List<OperateLog> operateLogList = operateLogMapper.selectByExample(relationshipsExample);
     //TODO verify
     System.out.println(operateLogList);
