@@ -8,7 +8,20 @@
 MBP(Mybatis Generator Plus)基于mybatis generator core v.1.3.2 源码扩展，增加一些特性,具体如下:
 ### 功能特性:  
 * 修改org.mybatis.generator.api.dom.java.Interface类，新增private List<Field> fields字段，用于让Mapper接口支持静态常量成员;  
-* 扩展Mybatis-Generator，自动生成支持Oracle、Mysql、Sqlserver分页查询和批量插入操作的自动代码，支持从Mapper接口读取数据源名称;  
+* 扩展Mybatis-Generator，自动生成支持Oracle、Mysql、Sqlserver分页查询和批量插入操作的自动代码，支持从Mapper接口读取数据源名称;
+```java
+@Test
+	public void selectPageTest() throws Exception {
+		UserExample userExample = new UserExample();
+		userExample.createCriteria().andUserNameLike("%test%");
+
+		PageHelper pageHelper = new PageHelper(0,10);
+		userExample.setPageHelper(pageHelper);
+		List<User> userList = userMapper.selectByExample(userExample);
+		//TODO verify
+		System.out.println(userList);
+	}
+```
 * 支持oracle使用SEQUENCE实现自增主键:  
 
 > 需要事先建立好表主键对应的SEQUENCE,并且SEQUENCE的名称作出了要求:格式为table_name_SEQUENCE   
