@@ -11,16 +11,16 @@ MBP(Mybatis Generator Plus)基于mybatis generator core v.1.3.2 源码扩展，�
 * 扩展Mybatis-Generator，自动生成支持Oracle、Mysql、Sqlserver分页查询和批量插入操作的自动代码，支持从Mapper接口读取数据源名称;
 ```java
 @Test
-	public void selectPageTest() throws Exception {
-		UserExample userExample = new UserExample();
-		userExample.createCriteria().andUserNameLike("%test%");
-
-		PageHelper pageHelper = new PageHelper(0,10);
-		userExample.setPageHelper(pageHelper);
-		List<User> userList = userMapper.selectByExample(userExample);
-		//TODO verify
-		System.out.println(userList);
-	}
+public void selectPageTest() throws Exception {
+	UserExample userExample = new UserExample();
+	userExample.createCriteria().andUserNameLike("%test%");
+	
+	PageHelper pageHelper = new PageHelper(0,10);
+	userExample.setPageHelper(pageHelper);
+	List<User> userList = userMapper.selectByExample(userExample);
+	//TODO verify
+	System.out.println(userList);
+}
 ```
 * 支持oracle使用SEQUENCE实现自增主键:  
 
