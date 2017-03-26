@@ -5,3 +5,6 @@ jdk:
   - oraclejdk8
   - oraclejdk7
   - openjdk7
+
+script:
+  - mvn package -Dmaven.test.skip=true
