@@ -42,7 +42,6 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         <!-- 数据表对应的实体层 -->
         <javaModelGenerator targetPackage="demo.domain" targetProject="src/test/java">
             <property name="enableSubPackages" value="true"/>
-            <property name="enableSubPackages" value="true"/>
         </javaModelGenerator>
 
         <!-- sql mapper 隐射配置文件(xml配置文件) -->
@@ -58,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         </javaClientGenerator>
 
         <!-- 要对那些数据表进行生成操作，必须要有一个 -->
-        <table tableName="test_user" domainObjectName="ooc.User">
+        <table tableName="ask_card_code_send_queue" domainObjectName="ooc.CardCodeSendQueue">
             <!-- 自定义属性配置：设置此属性表示该字段自增,默认值为id -->
             <property name="incrementField" value="id"/>
             <!-- 自定义属性配置：对应的数据源名称 -->

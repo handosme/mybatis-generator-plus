@@ -84,6 +84,7 @@ public abstract class AbstractJavaGenerator extends AbstractGenerator {
         field.setVisibility(JavaVisibility.PRIVATE);
         field.setType(fqjt);
         field.setName(property);
+        field.setComments(introspectedColumn.getRemarks());
         context.getCommentGenerator().addFieldComment(field,
                 introspectedTable, introspectedColumn);
 

@@ -45,7 +45,7 @@ public class CustomPlugin extends PluginAdapter {
 	 */
 	@Override
 	public boolean modelBaseRecordClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
-		addBuilder(topLevelClass, introspectedTable);
+		addBuilder(topLevelClass);
 		return super.modelBaseRecordClassGenerated(topLevelClass, introspectedTable);
 	}
 
@@ -56,7 +56,7 @@ public class CustomPlugin extends PluginAdapter {
 	 * @parameter @param introspectedTable
 	 * @createDate 2016年1月15日 上午11:27:58
 	 */
-	private void addBuilder(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+	private void addBuilder(TopLevelClass topLevelClass) {
 		//1. add InnerClass(Static Nested Classes)
 		InnerClass builder = new InnerClass("Builder");
 		builder.setStatic(true);
