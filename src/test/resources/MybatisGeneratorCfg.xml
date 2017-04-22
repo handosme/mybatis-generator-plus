@@ -34,10 +34,10 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 
 
         <!-- 用于数据库字段类型自定义转换 -->
-        <javaTypeResolver type="org.ihansen.mbp.extend.CustJavaTypeResolver">
-            <!-- 属性可以控制是否强制DECIMAL和NUMERIC类型的字段转换为Java类型的java.math.BigDecimal,默认值为false -->
-            <property name="forceBigDecimals" value="false"/>
-        </javaTypeResolver>
+        <!--<javaTypeResolver type="org.ihansen.mbp.extend.CustJavaTypeResolver">-->
+            <!--&lt;!&ndash; 属性可以控制是否强制DECIMAL和NUMERIC类型的字段转换为Java类型的java.math.BigDecimal,默认值为false &ndash;&gt;-->
+            <!--<property name="forceBigDecimals" value="false"/>-->
+        <!--</javaTypeResolver>-->
 
         <!-- 数据表对应的实体层 -->
         <javaModelGenerator targetPackage="demo.domain" targetProject="src/test/java">

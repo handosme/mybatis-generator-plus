@@ -5,7 +5,7 @@
 
 ![mybatis-generator](http://ihansen.oss-cn-hangzhou.aliyuncs.com/jar/mbp/1.3.2-plus/MBP.jpg)
 
-MBP(Mybatis Generator Plus)基于mybatis generator core v.1.3.2 源码扩展，增加一些特性,具体如下:
+MBP(Mybatis Generator Plus)基于mybatis generator core (v.1.3.2)源码扩展，增加如下主要特性:
 ### 功能特性:  
 * 修改org.mybatis.generator.api.dom.java.Interface类，新增private List<Field> fields字段，用于让Mapper接口支持静态常量成员;  
 * 扩展Mybatis-Generator，自动生成支持Oracle、Mysql、Sqlserver分页查询和批量插入操作的自动代码，支持从Mapper接口读取数据源名称;
@@ -32,29 +32,7 @@ User user = new User.Builder()
 				.build();
 ```  
 
-### 使用方式一：添加jar到本地仓库:
-本工具的使用方式和原生的MyBatis Generator使用方式一致,兼容原生版本,但是由于本工具还未提交到主流的mvn中央仓库,所以暂时提供在线下载的方式提供相关jar包:
-#### v.1.3.2-plus  
-v.1.3.2-plus jar file 下载地址:[mbp.jar](http://static-ali.ihansen.org/jar/mbp/1.3.2-plus/mbp.jar)       
-v.1.3.2-plus sources file下载地址:[mbp-sources.jar](http://static-ali.ihansen.org/jar/mbp/1.3.2-plus/mbp-sources.jar)  
-将jar安装到本地仓库的方式:
-```
-mvn install:install-file  -Dfile=/Users/user/download/mbp.jar  -DgroupId=org.ihansen.mbp  -DartifactId=mybatis-generator-plus -Dversion=1.3.2-plus -Dpackaging=jar
-```
-然后就可以使用maven方式引入MBP到自己的项目中了:
-```xml
-<dependency>
-    <groupId>org.ihansen.mbp</groupId>
-    <artifactId>mybatis-generator-plus</artifactId>
-    <version>1.3.2-plus</version>
-    <scope>test</scope>
-</dependency>
-```
-生成文件的dmeo入口: 
-[demo.MBPMain.main](https://github.com/handosme/mybatis-generator-plus/blob/master/src/test/java/demo/MBPMain.java)  
-
-
-### 使用方式二：运行可执行jar文件:  
+### 使用方式一：运行可执行jar文件[推荐] 
 包含运行依赖包的可独立执行jar文件：[mbp-jar-with-dependencies.jar](http://static-ali.ihansen.org/jar/mbp/1.3.2-plus/mbp-jar-with-dependencies.jar)  
 使用如下命令执行即可生成自动文件：
 ```bash
@@ -139,6 +117,30 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
     </context>
 </generatorConfiguration>
 ```
+
+### 使用方式二：main方法运行
+本工具的使用方式和原生的MyBatis Generator使用方式一致,兼容原生版本,但是由于本工具还未提交到主流的mvn中央仓库,所以暂时提供在线下载的方式提供相关jar包:
+#### v.1.3.2-plus  
+v.1.3.2-plus jar file 下载地址:[mbp.jar](http://static-ali.ihansen.org/jar/mbp/1.3.2-plus/mbp.jar)       
+v.1.3.2-plus sources file下载地址:[mbp-sources.jar](http://static-ali.ihansen.org/jar/mbp/1.3.2-plus/mbp-sources.jar)  
+将jar安装到本地仓库的方式:
+```
+mvn install:install-file  -Dfile=/Users/user/download/mbp.jar  -DgroupId=org.ihansen.mbp  -DartifactId=mybatis-generator-plus -Dversion=1.3.2-plus -Dpackaging=jar
+```
+然后就可以使用maven方式引入MBP到自己的项目中了:
+```xml
+<dependency>
+    <groupId>org.ihansen.mbp</groupId>
+    <artifactId>mybatis-generator-plus</artifactId>
+    <version>1.3.2-plus</version>
+    <scope>test</scope>
+</dependency>
+```
+生成文件的dmeo入口: 
+[demo.MBPMain.main](https://github.com/handosme/mybatis-generator-plus/blob/master/src/test/java/demo/MBPMain.java)  
+
+
+
 
 
 ### MBP的用户:
