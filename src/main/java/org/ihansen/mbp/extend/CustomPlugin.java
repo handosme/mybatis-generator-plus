@@ -282,6 +282,9 @@ public class CustomPlugin extends PluginAdapter {
 		TableConfiguration tableConfiguration = introspectedTable.getTableConfiguration();
 		Properties properties = tableConfiguration.getProperties();
 		String dataSourceName = properties.getProperty("dataSourceName");
+		if (dataSourceName == null || dataSourceName == "") {
+			return;
+		}
 		Field field = new Field();
 		field.setVisibility(JavaVisibility.PUBLIC);
 		field.setStatic(true);
