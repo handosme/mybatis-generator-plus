@@ -157,6 +157,7 @@
 				<version>2.10.2</version>
 				<configuration>
 					<aggregate>true</aggregate>
+					<additionalparam>-Xdoclint:none</additionalparam>
 				</configuration>
 				<executions>
 					<execution>
