@@ -120,7 +120,7 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 ```
 
 ### 使用方式二：main方法运行
-本工具的使用方式和原生的MyBatis Generator使用方式一致,兼容原生版本,maven 坐标:
+本工具的使用方式和原生的MyBatis Generator使用方式一致，兼容原生版本。maven 坐标:
 ```xml
 <dependency>
   <groupId>org.ihansen.mbp</groupId>
