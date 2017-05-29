@@ -7,4 +7,4 @@ jdk:
   - openjdk7
 
 script:
-  - mvn package -Dmaven.test.skip=true
+  - mvn package -Dmaven.test.skip=true -Dmaven.javadoc.skip=true
