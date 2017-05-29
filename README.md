@@ -2,7 +2,7 @@
 
 [![License](http://img.shields.io/:license-apache-brightgreen.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![Build Status](https://travis-ci.org/handosme/mybatis-generator-plus.svg?branch=master)](https://travis-ci.org/handosme/mybatis-generator-plus)
-[![Maven Central](https://img.shields.io/maven-central/v/org.apache.maven/apache-maven.svg)](https://oss.sonatype.org/#nexus-search;quick~ihansen)
+[![Maven Central](https://img.shields.io/maven-central/v/org.apache.maven/apache-maven.svg)](http://search.maven.org/#artifactdetails%7Corg.ihansen.mbp%7Cmybatis-generator-plus%7C1.1%7Cjar)
 
 ![mybatis-generator](http://ihansen.oss-cn-hangzhou.aliyuncs.com/jar/mbp/1.3.2-plus/MBP.jpg)
 
