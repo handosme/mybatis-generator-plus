@@ -128,7 +128,7 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
   <version>1.1</version>
 </dependency>
 ```
-你也可以选择直接下载jar文件，然后安装到本地maven仓库: 
+你也可以选择直接下载jar文件，然后安装到本地maven仓库:   
 v.1.1 jar file 下载地址:[mbp.jar](http://static-ali.ihansen.org/jar/mbp/1.3.2-plus/mbp.jar)       
 v.1.1 sources file下载地址:[mbp-sources.jar](http://static-ali.ihansen.org/jar/mbp/1.3.2-plus/mbp-sources.jar)  
 将jar安装到本地仓库的方式:
