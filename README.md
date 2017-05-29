@@ -2,6 +2,7 @@
 
 [![License](http://img.shields.io/:license-apache-brightgreen.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![Build Status](https://travis-ci.org/handosme/mybatis-generator-plus.svg?branch=master)](https://travis-ci.org/handosme/mybatis-generator-plus)
+[![Maven Central](https://img.shields.io/maven-central/v/org.apache.maven/apache-maven.svg)](https://oss.sonatype.org/#nexus-search;quick~ihansen)
 
 ![mybatis-generator](http://ihansen.oss-cn-hangzhou.aliyuncs.com/jar/mbp/1.3.2-plus/MBP.jpg)
 
@@ -119,23 +120,22 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 ```
 
 ### 使用方式二：main方法运行
-本工具的使用方式和原生的MyBatis Generator使用方式一致,兼容原生版本,但是由于本工具还未提交到主流的mvn中央仓库,所以暂时提供在线下载的方式提供相关jar包:
-#### v.1.3.2-plus  
-v.1.3.2-plus jar file 下载地址:[mbp.jar](http://static-ali.ihansen.org/jar/mbp/1.3.2-plus/mbp.jar)       
-v.1.3.2-plus sources file下载地址:[mbp-sources.jar](http://static-ali.ihansen.org/jar/mbp/1.3.2-plus/mbp-sources.jar)  
-将jar安装到本地仓库的方式:
-```
-mvn install:install-file  -Dfile=/Users/user/download/mbp.jar  -DgroupId=org.ihansen.mbp  -DartifactId=mybatis-generator-plus -Dversion=1.3.2-plus -Dpackaging=jar
-```
-然后就可以使用maven方式引入MBP到自己的项目中了:
+本工具的使用方式和原生的MyBatis Generator使用方式一致,兼容原生版本,maven 坐标:
 ```xml
 <dependency>
-    <groupId>org.ihansen.mbp</groupId>
-    <artifactId>mybatis-generator-plus</artifactId>
-    <version>1.3.2-plus</version>
-    <scope>test</scope>
+  <groupId>org.ihansen.mbp</groupId>
+  <artifactId>mybatis-generator-plus</artifactId>
+  <version>1.1</version>
 </dependency>
 ```
+你也可以选择直接下载jar文件，然后安装到本地maven仓库: 
+v.1.1 jar file 下载地址:[mbp.jar](http://static-ali.ihansen.org/jar/mbp/1.3.2-plus/mbp.jar)       
+v.1.1 sources file下载地址:[mbp-sources.jar](http://static-ali.ihansen.org/jar/mbp/1.3.2-plus/mbp-sources.jar)  
+将jar安装到本地仓库的方式:
+```
+mvn install:install-file  -Dfile=/Users/user/download/mbp.jar  -DgroupId=org.ihansen.mbp  -DartifactId=mybatis-generator-plus -Dversion=1.1 -Dpackaging=jar
+```
+
 生成文件的dmeo入口: 
 [demo.MBPMain.main](https://github.com/handosme/mybatis-generator-plus/blob/master/src/test/java/demo/MBPMain.java)  
 
