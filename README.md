@@ -7,7 +7,7 @@
 ![mybatis-generator](http://ihansen.oss-cn-hangzhou.aliyuncs.com/jar/mbp/1.3.2-plus/MBP.jpg)
 
 ### 1.介绍:  
-MBP(Mybatis Generator Plus)基于mybatis generator core (v.1.3.2)源码扩展，增加如下主要特性:
+MBP(Mybatis-generator Plus)基于mybatis-generator-core v.1.3.2源码扩展，增加如下主要特性:
 1. 扩展Mybatis-Generator，自动生成支持Oracle、Mysql、Sqlserver分页查询和批量插入操作的自动代码，支持从Mapper接口读取数据源名称;
 ```java
 //分页查询demo
