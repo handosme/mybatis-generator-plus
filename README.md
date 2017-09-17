@@ -53,6 +53,13 @@ java -jar mbp-jar-with-dependencies.jar -configfile MybatisGeneratorCfg.xml -ove
   <groupId>org.ihansen.mbp</groupId>
   <artifactId>mybatis-generator-plus</artifactId>
   <version>1.1</version>
+    <exclusions>
+       <exclusion>
+           <groupId>org.mybatis.generator</groupId>
+           <artifactId>mybatis-generator</artifactId>
+	   </exclusion>
+    </exclusions>
+  <scope>test</scope>
 </dependency>
 ```
 你也可以选择直接下载jar文件，然后安装到本地maven仓库:   

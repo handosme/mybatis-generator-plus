@@ -49,26 +49,27 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.21</version>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
 			<version>3.1.1</version>
+			<optional>true</optional>
 		</dependency>
-
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.9</version>
-			<scope>test</scope>
-		</dependency>
-
 		<!--支持MySql,SQLServer,Oracle数据库jdbc驱动 start-->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.37</version>
+			<optional>true</optional>
+		</dependency>
 		<dependency>
 			<groupId>com.hynnet</groupId>
 			<artifactId>oracle-driver-ojdbc</artifactId>
@@ -79,18 +80,21 @@
 					<groupId>slf4j-api</groupId>
 				</exclusion>
 			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.37</version>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>com.hynnet</groupId>
 			<artifactId>sqljdbc4-chs</artifactId>
 			<version>4.0.2206.100</version>
+			<optional>true</optional>
 		</dependency>
 		<!--支持MySql,SQLServer,Oracle数据库jdbc驱动 end-->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.9</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<profiles>
