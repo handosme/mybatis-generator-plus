@@ -4,9 +4,9 @@
 
 	<groupId>org.ihansen.mbp</groupId>
 	<artifactId>mybatis-generator-plus</artifactId>
-	<version>1.1</version>
+	<version>1.2</version>
 	<name>mybatis-generator-plus</name>
-	<description>轻度扩展mybatis-generator-core插件，完美兼容官方插件自动代码</description>
+	<description>轻度扩展mybatis-generator-core插件，兼容官方插件自动代码</description>
 	<url>https://github.com/handosme/mybatis-generator-plus</url>
 
 	<parent>
@@ -130,6 +130,7 @@
 			</resource>
 		</resources>
 		<plugins>
+			<!-- main class -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
@@ -142,6 +143,7 @@
 					</archive>
 				</configuration>
 			</plugin>
+			<!-- assembly -->
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<configuration>
@@ -155,6 +157,7 @@
 					</descriptorRefs>
 				</configuration>
 			</plugin>
+			<!-- Javadoc -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -165,15 +168,16 @@
 						<goals>
 							<goal>jar</goal>
 						</goals>
-						<configuration>
-							<additionalparam>-Xdoclint:none</additionalparam>
-						</configuration>
+						<!--<configuration>-->
+							<!--<additionalparam>-Xdoclint:none</additionalparam>-->
+						<!--</configuration>-->
 					</execution>
 				</executions>
 				<configuration>
 					<aggregate>true</aggregate>
 				</configuration>
 			</plugin>
+			<!-- Source -->
 			<plugin>
 				<artifactId>maven-source-plugin</artifactId>
 				<version>2.1</version>
