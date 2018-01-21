@@ -37,7 +37,7 @@ User user = new User.Builder()
 
 ### 2.使用方式
 #### 2.1. 方式一：运行可执行jar文件[推荐] 
-包含运行依赖包的可独立执行jar文件：[mbp-jar-with-dependencies.jar](http://static-ali.ihansen.org/jar/mbp/1.3.2-plus/mbp-jar-with-dependencies.jar)   
+包含运行依赖包的可独立执行jar文件：[mbp-jar-with-dependencies.jar](http://static-ali.ihansen.org/jar/mbp/mbp-jar-with-dependencies-1.3.jar)   
 供参考的MBP配置文件: 
 [MybatisGeneratorCfg.xml](https://github.com/handosme/mybatis-generator-plus/blob/master/src/test/resources/MybatisGeneratorCfg.xml)  
 使用如下命令执行即可生成自动文件：
@@ -52,7 +52,7 @@ java -jar mbp-jar-with-dependencies.jar -configfile MybatisGeneratorCfg.xml -ove
 <dependency>
   <groupId>org.ihansen.mbp</groupId>
   <artifactId>mybatis-generator-plus</artifactId>
-  <version>1.1</version>
+  <version>1.3</version>
     <exclusions>
        <exclusion>
            <groupId>org.mybatis.generator</groupId>

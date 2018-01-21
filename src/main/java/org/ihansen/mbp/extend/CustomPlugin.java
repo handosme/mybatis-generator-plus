@@ -141,6 +141,12 @@ public class CustomPlugin extends PluginAdapter {
 	}
 
 	@Override
+	public boolean sqlMapSelectByExampleWithBLOBsElementGenerated(XmlElement element, IntrospectedTable introspectedTable) {
+		XmlElement newElement = dbSupport.adaptSelectByExample(element, introspectedTable);
+		return super.sqlMapSelectByExampleWithBLOBsElementGenerated(newElement, introspectedTable);
+	}
+
+	@Override
 	public boolean sqlMapInsertSelectiveElementGenerated(XmlElement element, IntrospectedTable introspectedTable) {
 		dbSupport.adaptInsertSelective(element, introspectedTable);
 		return super.sqlMapInsertSelectiveElementGenerated(element, introspectedTable);

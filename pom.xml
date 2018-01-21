@@ -4,7 +4,7 @@
 
 	<groupId>org.ihansen.mbp</groupId>
 	<artifactId>mybatis-generator-plus</artifactId>
-	<version>1.2</version>
+	<version>1.3</version>
 	<name>mybatis-generator-plus</name>
 	<description>轻度扩展mybatis-generator-core插件，兼容官方插件自动代码</description>
 	<url>https://github.com/handosme/mybatis-generator-plus</url>
