@@ -28,7 +28,7 @@ public class SqlServerSupport implements DBSupport {
         paginationPrefixElement.addAttribute(new Attribute("id", "SqlServerDialectPrefix"));
         XmlElement prefixIf = new XmlElement("if");
         prefixIf.addAttribute(new Attribute("test", "offset != null and end != null"));
-        prefixIf.addElement(new TextElement("SELECT *FROM ("));
+        prefixIf.addElement(new TextElement("SELECT * FROM ("));
         paginationPrefixElement.addElement(prefixIf);
         parentElement.addElement(paginationPrefixElement);
 
