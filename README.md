@@ -12,7 +12,7 @@ MBP(Mybatis-generator Plus)基于mybatis-generator-core v.1.3.2源码扩展，�
 ```java
 //分页查询demo
 @Test
-public void selectPageTest() throws Exception {
+public void selectPageTest() throws Exception {  
 	OperateLogExample relationshipsExample = new OperateLogExample();
     relationshipsExample.setPagination(0L,10L);
     List<OperateLog> operateLogList = operateLogMapper.selectByExample(relationshipsExample);
@@ -53,12 +53,6 @@ java -jar mbp-jar-with-dependencies.jar -configfile MybatisGeneratorCfg.xml -ove
   <groupId>org.ihansen.mbp</groupId>
   <artifactId>mybatis-generator-plus</artifactId>
   <version>1.3</version>
-    <exclusions>
-       <exclusion>
-           <groupId>org.mybatis.generator</groupId>
-           <artifactId>mybatis-generator</artifactId>
-	   </exclusion>
-    </exclusions>
   <scope>test</scope>
 </dependency>
 ```
