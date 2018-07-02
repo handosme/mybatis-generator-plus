@@ -1,4 +1,4 @@
-# MBP(Mybatis Generator Plus)
+# MBP(MyBatis generator Plus)
 
 [![License](http://img.shields.io/:license-apache-brightgreen.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![Build Status](https://travis-ci.org/handosme/mybatis-generator-plus.svg?branch=master)](https://travis-ci.org/handosme/mybatis-generator-plus)
@@ -7,8 +7,8 @@
 ![mybatis-generator](http://ihansen.oss-cn-hangzhou.aliyuncs.com/jar/mbp/1.3.2-plus/MBP.jpg)
 
 ### 1.介绍:  
-MBP(Mybatis-generator Plus)基于mybatis-generator-core v.1.3.2源码扩展，增加如下主要特性:
-1. 扩展Mybatis-Generator，自动生成支持Oracle、Mysql、Sqlserver分页查询和批量插入操作的自动代码，支持从Mapper接口读取数据源名称;
+MBP(MyBatis-generator Plus)基于mybatis-generator-core v.1.3.2源码扩展，增加如下主要特性:
+1. 扩展MyBatis-Generator，自动生成支持Oracle、Mysql、Sqlserver分页查询和批量插入操作的自动代码，支持从Mapper接口读取数据源名称;
 ```java
 //分页查询demo
 @Test
@@ -47,7 +47,7 @@ java -jar mbp-jar-with-dependencies.jar -configfile MybatisGeneratorCfg.xml -ove
 
 
 #### 2.2. 方式二：main方法运行
-本工具的使用方式和原生的MyBatis Generator使用方式一致，兼容原生版本。maven 坐标:
+本工具的使用方式和原生的MyBatis generator使用方式一致，兼容原生版本。maven 坐标:
 ```xml
 <dependency>
   <groupId>org.ihansen.mbp</groupId>
