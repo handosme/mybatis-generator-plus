@@ -9,13 +9,11 @@ MyBatis generator plus 基于mybatis-generator-core v.1.3.2 扩展，增加如�
 1. 生成支持Oracle、Mysql、Sqlserver分页查询的代码:   
 ```java
 //分页查询demo
-@Test
-public void selectPageTest() throws Exception {  
-	OperateLogExample relationshipsExample = new OperateLogExample();
-    relationshipsExample.setPagination(0L,10L);
-    List<OperateLog> operateLogList = operateLogMapper.selectByExample(relationshipsExample);
-    //...
-```
+OperateLogExample relationshipsExample = new OperateLogExample();
+relationshipsExample.setPagination(0L,10L);
+List<OperateLog> operateLogList = operateLogMapper.selectByExample(relationshipsExample);
+```  
+
 2. 生成支持Oracle、Mysql、Sqlserver批量插入的代码:   
 ```java
 //批量插入demo
@@ -27,24 +25,22 @@ for (int i = 0; i < 5; i++) {
     operateLogList.add(operateLog);
 }
 operateLogMapper.insertBatch(operateLogList);
-```
+```  
 
 3. Model类支持Builder模式创建,示例代码:
 ```java
 User user = new User.Builder()
-				.userName("insert_test")
-				.creatTime(new Date())
-				.updateTime(new Date())
-				.build();
-```  
+    .userName("insert_test")
+    .creatTime(new Date())
+    .updateTime(new Date())
+    .build();
+```   
+
 4. 支持Oracle使用SEQUENCE实现自增主键:  
 *需要建立表主键对应的SEQUENCE,并且SEQUENCE的名称作出了要求:格式为table_name_SEQUENCE*
 5. 支持Mapper接口设置数据源schema，可用于分库业务;
-```java
-public interface OperateLogMapper {
-    public static final String DATA_SOURCE_NAME = "logDB";//这里可以用于标示数据源schema
-    //...
-```
+[demo.mapper.ooc.UserVisitLogMapper.DATA_SOURCE_NAME](https://github.com/handosme/mybatis-generator-plus/blob/f9f6b609339bdfbc0ba95fa05aad9c85d8bad7e7/src/test/java/demo/mapper/ooc/UserVisitLogMapper.java#L9)  
+
 6. 针对MySQL下分页大偏移量时慢查询优化。
 
 ### 2.使用方式  
