@@ -44,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
             <property name="enableSubPackages" value="true"/>
         </javaModelGenerator>
 
-        <!-- sql mapper 隐射配置文件(xml配置文件) -->
+        <!-- sql mapper 配置文件(xml配置文件) -->
         <sqlMapGenerator targetPackage="demo.mapperxml" targetProject="src/test/resources">
             <property name="enableSubPackages" value="true"/>
             <!-- 此属性表示是否和原xml合并,false表示覆盖 -->
@@ -56,8 +56,8 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <!-- 要对那些数据表进行生成操作，必须要有一个 -->
-        <table tableName="ask_card_code_send_queue" domainObjectName="ooc.CardCodeSendQueue">
+        <!-- 要对那些数据表进行生成操作，至少要有一个 -->
+        <table tableName="user_visit_log" domainObjectName="ooc.UserVisitLog">
             <!-- 自定义属性配置：设置此属性表示该字段自增,默认值为id -->
             <property name="incrementField" value="id"/>
             <!-- 自定义属性配置：对应的数据源名称 -->
@@ -68,8 +68,7 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
             <property name="enableSelectByExample" value="true"/>
             <property name="selectByExampleQueryId" value="true"/>
         </table>
-
-        <table tableName="test_name" domainObjectName="oob.Name" incrementField="id"></table>
+        <!--<table tableName="test_name" domainObjectName="oob.Name" incrementField="id"></table>-->
 
     </context>
 </generatorConfiguration>

@@ -1,17 +1,15 @@
 package demo;
 
 
-
 import demo.domain.oob.OperateLog;
 import demo.domain.oob.OperateLogExample;
-import demo.domain.ooc.User;
-import demo.domain.ooc.UserExample;
+import demo.domain.ooc.UserVisitLog;
+import demo.domain.ooc.UserVisitLogExample;
 import demo.mapper.oob.OperateLogMapper;
-import demo.mapper.ooc.UserMapper;
+import demo.mapper.ooc.UserVisitLogMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.ihansen.mbp.extend.PageHelper;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,16 +17,15 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class HelloTest {
 
 	SqlSession sqlSession;
 
-	UserMapper userMapper;
-
 	OperateLogMapper operateLogMapper;
+
+	UserVisitLogMapper userVisitLogMapper;
 
 	@Before
 	public void before() throws FileNotFoundException {
@@ -39,8 +36,8 @@ public class HelloTest {
 		// 构建sqlSession的工厂
 		SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(is);
 		sqlSession = sessionFactory.openSession();
-		userMapper = sqlSession.getMapper(UserMapper.class);
 		operateLogMapper = sqlSession.getMapper(OperateLogMapper.class);
+		userVisitLogMapper = sqlSession.getMapper(UserVisitLogMapper.class);
 	}
 
 	/**
@@ -51,12 +48,10 @@ public class HelloTest {
 	 */
 	@Test
 	public void insertTest() throws Exception {
-		User user = new User.Builder()
-				.userName("insert_test")
-				.creatTime(new Date())
-				.updateTime(new Date())
+		OperateLog operateLog = new OperateLog.Builder()
+				.action("insert_test")
 				.build();
-		userMapper.insertSelective(user);
+		operateLogMapper.insertSelective(operateLog);
 		sqlSession.commit();
 	}
 
@@ -68,31 +63,15 @@ public class HelloTest {
 	 */
 	@Test
 	public void insertBatchTest() throws Exception {
-		List<User> userList = new ArrayList<>();
+		List<OperateLog> operateLogList = new ArrayList<>();
 		for (int i = 0; i < 5; i++) {
-			User user = new User.Builder()
-					.userName("insertBatch_test"+i)
-					.isDeleted((byte) 0)
-					.creatTime(new Date())
-					.updateTime(new Date())
+			OperateLog operateLog = new OperateLog.Builder()
+					.action("insertBatch_test"+i)
 					.build();
-			userList.add(user);
+			operateLogList.add(operateLog);
 		}
-		userMapper.insertBatch(userList);
+		operateLogMapper.insertBatch(operateLogList);
 		sqlSession.commit();
-	}
-
-	/**
-	 * select Test
-	 * @throws Exception
-     */
-	@Test
-	public void selectTest() throws Exception {
-		UserExample userExample = new UserExample();
-		userExample.createCriteria().andUserNameLike("%0%");
-		List<User> userList = userMapper.selectByExample(userExample);
-		//TODO verify
-		System.out.println(userList);
 	}
 
 
@@ -107,6 +86,15 @@ public class HelloTest {
 		List<OperateLog> operateLogList = operateLogMapper.selectByExample(relationshipsExample);
 		//TODO verify
 		System.out.println(operateLogList);
+	}
+
+	@Test
+	public void selectByBigOffsetTest(){
+		UserVisitLogExample userVisitLogExample = new UserVisitLogExample();
+		userVisitLogExample.createCriteria().andIdLessThan(100);
+		userVisitLogExample.setPagination(0,10);
+		List<UserVisitLog> userVisitLogList = userVisitLogMapper.selectByBigOffset(userVisitLogExample);
+		System.out.println(userVisitLogList);
 	}
 
 

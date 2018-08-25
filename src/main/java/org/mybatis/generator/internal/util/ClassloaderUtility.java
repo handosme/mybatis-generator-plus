@@ -23,6 +23,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -39,7 +40,7 @@ public class ClassloaderUtility {
     private ClassloaderUtility() {
     }
 
-    public static ClassLoader getCustomClassloader(List<String> entries) {
+    public static ClassLoader getCustomClassloader(Collection<String> entries) {
         List<URL> urls = new ArrayList<URL>();
         File file;
 

@@ -116,11 +116,16 @@ public class CustomPlugin extends PluginAdapter {
 	 */
 	@Override
 	public boolean clientGenerated(Interface interfaze, TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
-		// 1.增加批量插入方式签名
+		// 1.增加批量插入方法签名
 		addBatchInsertMethod(interfaze, introspectedTable);
 
 		// 2.增加数据源名称常量
 		addDataSourceNameField(interfaze, introspectedTable);
+
+		// 3.MYSQL增加大偏移批量查询方法签名
+		if ("MYSQL".equals(dbType)) {
+			selectByBigOffsetMethod(interfaze, introspectedTable);
+		}
 
 		return super.clientGenerated(interfaze, topLevelClass, introspectedTable);
 	}
@@ -218,8 +223,7 @@ public class CustomPlugin extends PluginAdapter {
 		}
 		else if (introspectedTable.getRules().generatePrimaryKeyClass()) {
 			paramListType = new FullyQualifiedJavaType(introspectedTable.getPrimaryKeyType());
-		}
-		else {
+		} else {
 			throw new RuntimeException(getString("RuntimeError.12")); //$NON-NLS-1$  
 		}
 		paramType.addTypeArgument(paramListType);
@@ -299,5 +303,27 @@ public class CustomPlugin extends PluginAdapter {
 		field.setName("DATA_SOURCE_NAME");
 		field.setInitializationString("\"" + dataSourceName + "\"");
 		interfaze.addField(field);
+	}
+
+	/**
+	 * 大偏移批量查询
+	 * @param interfaze
+	 * @param introspectedTable
+	 */
+	private void selectByBigOffsetMethod(Interface interfaze, IntrospectedTable introspectedTable) {
+		Method method = new Method();
+		// 1.设置方法可见性
+		method.setVisibility(JavaVisibility.PUBLIC);
+		// 2.设置返回值类型
+		FullyQualifiedJavaType returnType = FullyQualifiedJavaType.getNewListInstance();
+		FullyQualifiedJavaType paramListType = new FullyQualifiedJavaType(introspectedTable.getBaseRecordType());
+		returnType.addTypeArgument(paramListType);
+		method.setReturnType(returnType);
+		// 3.设置方法名
+		method.setName("selectByBigOffset");
+		// 4.设置方法入参
+		FullyQualifiedJavaType type = new FullyQualifiedJavaType(introspectedTable.getExampleType());
+		method.addParameter(new Parameter(type, "example"));
+		interfaze.addMethod(method);
 	}
 }

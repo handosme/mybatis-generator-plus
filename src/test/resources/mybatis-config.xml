@@ -21,7 +21,7 @@
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="demo/mapperxml/ooc/UserMapper.xml"/>
 		<mapper resource="demo/mapperxml/oob/OperateLogMapper.xml"/>
+		<mapper resource="demo/mapperxml/ooc/UserVisitLogMapper.xml"/>
 	</mappers>
 </configuration> 
