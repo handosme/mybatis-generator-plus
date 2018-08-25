@@ -38,7 +38,7 @@ User user = new User.Builder()
 
 4. 支持Oracle使用SEQUENCE实现自增主键:  
 *需要建立表主键对应的SEQUENCE,并且SEQUENCE的名称作出了要求:格式为table_name_SEQUENCE*
-5. 支持Mapper接口设置数据源schema，可用于分库业务;
+5. 支持Mapper接口设置数据源schema，可用于分库业务;  
 [demo.mapper.ooc.UserVisitLogMapper.DATA_SOURCE_NAME](https://github.com/handosme/mybatis-generator-plus/blob/f9f6b609339bdfbc0ba95fa05aad9c85d8bad7e7/src/test/java/demo/mapper/ooc/UserVisitLogMapper.java#L9)  
 
 6. 针对MySQL下分页大偏移量时慢查询优化。
@@ -91,7 +91,7 @@ java -jar mybatis-generator-plus-jar-with-dependencies-1.4.jar -configfile Mybat
 
 
 ### 3.MBP的用户:
-[![ihansen.org](http://ihansen.oss-cn-hangzhou.aliyuncs.com/img/ihansen.png)](http://www.ihansen.org/)
+[![ihansen.org](http://ihansen.oss-cn-hangzhou.aliyuncs.com/img/ihansen.png)](https://api.ihansen.org/)
 [![掌上110](http://ihansen.oss-cn-hangzhou.aliyuncs.com/img/110_6b54392.png)](http://www.lvwan.com/110.html)
 
 
