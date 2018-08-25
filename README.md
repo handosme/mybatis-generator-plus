@@ -4,8 +4,6 @@
 [![Build Status](https://travis-ci.org/handosme/mybatis-generator-plus.svg?branch=master)](https://travis-ci.org/handosme/mybatis-generator-plus)
 [![Maven Central](https://img.shields.io/maven-central/v/org.apache.maven/apache-maven.svg)](http://search.maven.org/#artifactdetails%7Corg.ihansen.mbp%7Cmybatis-generator-plus%7C1.1%7Cjar)
 
-![mybatis generator plus](http://ihansen.oss-cn-hangzhou.aliyuncs.com/jar/mbp/1.3.2-plus/MBP.jpg)
-
 ### 1.介绍:  
 MyBatis generator plus 基于mybatis-generator-core v.1.3.2 扩展，增加如下主要特性:
 1. 扩展MyBatis-Generator，自动生成支持Oracle、Mysql、Sqlserver分页查询和批量插入操作的自动代码，支持从Mapper接口读取数据源名称;
@@ -34,21 +32,21 @@ User user = new User.Builder()
 				.updateTime(new Date())
 				.build();
 ```  
-5. 针对MySQL下分页时大偏移慢查询优化。
+5. 针对MySQL下分页大偏移量时慢查询优化。
 
 ### 2.使用方式  
 #### 方式一: 配置maven插件生成代码【推荐】  
 pom里plugin配置如下：  
 ```xml
 <plugin>
-    <groupId>org.ihansen.mbp</groupId>
-	<artifactId>mybatis-generator-plus-maven-plugin</artifactId>
-	<version>1.4</version>
-	<configuration>
-	    <verbose>true</verbose>
-	    <overwrite>true</overwrite>
-		<configurationFile>tool/mbp/MybatisGeneratorCfg.xml</configurationFile>
-	</configuration>
+  <groupId>org.ihansen.mbp</groupId>
+  <artifactId>mybatis-generator-plus-maven-plugin</artifactId>
+  <version>1.4</version>
+  <configuration>
+    <verbose>true</verbose>
+    <overwrite>true</overwrite>
+    <configurationFile>tool/mbp/MybatisGeneratorCfg.xml</configurationFile>
+  </configuration>
 </plugin>
 ```
 供参考的MBP配置文件: 
@@ -57,7 +55,6 @@ pom里plugin配置如下：
 ```bash
 mvn org.ihansen.mbp:mybatis-generator-plus-maven-plugin:1.4:generate
 ```
-
 
 #### 方式二：运行可执行jar文件  
 包含运行依赖包的可独立执行jar文件：[mybatis-generator-plus-jar-with-dependencies.jar](https://static-ali.ihansen.org/jar/mbp/mybatis-generator-plus-jar-with-dependencies-1.4.jar)   
