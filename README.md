@@ -6,7 +6,7 @@
 
 ### 1.介绍:  
 MyBatis generator plus 基于mybatis-generator-core v.1.3.2 扩展，增加如下主要特性:
-1. 扩展MyBatis-Generator，自动生成支持Oracle、Mysql、Sqlserver分页查询和批量插入操作的自动代码，支持从Mapper接口读取数据源名称;
+1. 生成支持Oracle、Mysql、Sqlserver分页查询的代码:   
 ```java
 //分页查询demo
 @Test
@@ -16,15 +16,20 @@ public void selectPageTest() throws Exception {
     List<OperateLog> operateLogList = operateLogMapper.selectByExample(relationshipsExample);
     //...
 ```
-2. 支持Mapper接口设置数据源，可用于业务垂直分库;
+2. 生成支持Oracle、Mysql、Sqlserver批量插入的代码:   
 ```java
-public interface OperateLogMapper {
-    public static final String DATA_SOURCE_NAME = "logDB";//这里可以用于标示数据源名称
-    //...
+//批量插入demo
+List<OperateLog> operateLogList = new ArrayList<>();
+for (int i = 0; i < 5; i++) {
+    OperateLog operateLog = new OperateLog.Builder()
+        .action("insertBatch_test"+i)
+        .build();
+    operateLogList.add(operateLog);
+}
+operateLogMapper.insertBatch(operateLogList);
 ```
-3. 支持Oracle使用SEQUENCE实现自增主键:  
-*需要建立表主键对应的SEQUENCE,并且SEQUENCE的名称作出了要求:格式为table_name_SEQUENCE*
-4. Model类支持Builder模式创建,示例代码:
+
+3. Model类支持Builder模式创建,示例代码:
 ```java
 User user = new User.Builder()
 				.userName("insert_test")
@@ -32,7 +37,15 @@ User user = new User.Builder()
 				.updateTime(new Date())
 				.build();
 ```  
-5. 针对MySQL下分页大偏移量时慢查询优化。
+4. 支持Oracle使用SEQUENCE实现自增主键:  
+*需要建立表主键对应的SEQUENCE,并且SEQUENCE的名称作出了要求:格式为table_name_SEQUENCE*
+5. 支持Mapper接口设置数据源schema，可用于分库业务;
+```java
+public interface OperateLogMapper {
+    public static final String DATA_SOURCE_NAME = "logDB";//这里可以用于标示数据源schema
+    //...
+```
+6. 针对MySQL下分页大偏移量时慢查询优化。
 
 ### 2.使用方式  
 #### 方式一: 配置maven插件生成代码【推荐】  
