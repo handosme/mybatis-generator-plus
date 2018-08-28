@@ -122,10 +122,11 @@ public class CustomPlugin extends PluginAdapter {
 		// 2.增加数据源名称常量
 		addDataSourceNameField(interfaze, introspectedTable);
 
-		// 3.MYSQL增加大偏移批量查询方法签名
-		if ("MYSQL".equals(dbType)) {
-			selectByBigOffsetMethod(interfaze, introspectedTable);
-		}
+		// 3.增加大偏移批量查询方法签名
+		dbSupport.addSelectByBigOffsetMethod(interfaze, introspectedTable);
+
+		// .增加乐观锁更新方法签名
+		dbSupport.addUpdateByOptimisticLockMethod(interfaze, introspectedTable);
 
 		return super.clientGenerated(interfaze, topLevelClass, introspectedTable);
 	}
@@ -305,25 +306,4 @@ public class CustomPlugin extends PluginAdapter {
 		interfaze.addField(field);
 	}
 
-	/**
-	 * 大偏移批量查询
-	 * @param interfaze
-	 * @param introspectedTable
-	 */
-	private void selectByBigOffsetMethod(Interface interfaze, IntrospectedTable introspectedTable) {
-		Method method = new Method();
-		// 1.设置方法可见性
-		method.setVisibility(JavaVisibility.PUBLIC);
-		// 2.设置返回值类型
-		FullyQualifiedJavaType returnType = FullyQualifiedJavaType.getNewListInstance();
-		FullyQualifiedJavaType paramListType = new FullyQualifiedJavaType(introspectedTable.getBaseRecordType());
-		returnType.addTypeArgument(paramListType);
-		method.setReturnType(returnType);
-		// 3.设置方法名
-		method.setName("selectByBigOffset");
-		// 4.设置方法入参
-		FullyQualifiedJavaType type = new FullyQualifiedJavaType(introspectedTable.getExampleType());
-		method.addParameter(new Parameter(type, "example"));
-		interfaze.addMethod(method);
-	}
 }

@@ -41,7 +41,9 @@ User user = new User.Builder()
 5. 支持Mapper接口设置数据源schema，可用于分库业务;  
 [demo.mapper.ooc.UserVisitLogMapper.DATA_SOURCE_NAME](https://github.com/handosme/mybatis-generator-plus/blob/f9f6b609339bdfbc0ba95fa05aad9c85d8bad7e7/src/test/java/demo/mapper/ooc/UserVisitLogMapper.java#L9)  
 
-6. 针对MySQL下分页大偏移量时慢查询优化。
+6. 针对MySQL下分页大偏移量时慢查询优化`List<Domain> selectByBigOffset(DomainExample example)`;
+
+7. 乐观锁支持`int updateByOptimisticLock(Domain record)`;
 
 ### 2.使用方式  
 #### 方式一: 配置maven插件生成代码【推荐】  

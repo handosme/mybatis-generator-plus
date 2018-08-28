@@ -57,11 +57,13 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         </javaClientGenerator>
 
         <!-- 要对那些数据表进行生成操作，至少要有一个 -->
-        <table tableName="user_visit_log" domainObjectName="ooc.UserVisitLog">
+        <table tableName="ask_vip_card_base" domainObjectName="ooc.VipCardBase">
             <!-- 自定义属性配置：设置此属性表示该字段自增,默认值为id -->
             <property name="incrementField" value="id"/>
+            <!-- 自定义属性配置：乐观锁版本数据库字段名称，需要为数值类型 -->
+            <property name="versionField" value="version"/>
             <!-- 自定义属性配置：对应的数据源名称 -->
-            <property name="dataSourceName" value="db6"/>
+            <!--<property name="dataSourceName" value="db6"/>-->
             <property name="enableCountByExample" value="true"/>
             <property name="enableUpdateByExample" value="true"/>
             <property name="enableDeleteByExample" value="true"/>

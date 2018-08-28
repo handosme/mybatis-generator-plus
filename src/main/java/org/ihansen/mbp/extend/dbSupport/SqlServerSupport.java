@@ -5,6 +5,7 @@ import java.util.List;
 import org.ihansen.mbp.extend.DBSupport;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
+import org.mybatis.generator.api.dom.java.Interface;
 import org.mybatis.generator.api.dom.xml.Attribute;
 import org.mybatis.generator.api.dom.xml.Document;
 import org.mybatis.generator.api.dom.xml.Element;
@@ -173,6 +174,16 @@ public class SqlServerSupport implements DBSupport {
      */
     @Override
     public void adaptInsertSelective(XmlElement element, IntrospectedTable introspectedTable) {
+        //todo@wus 2018/8/28 
+    }
 
+    @Override
+    public void addSelectByBigOffsetMethod(Interface interfaze, IntrospectedTable introspectedTable) {
+        //todo@wus 2018/8/28 
+    }
+
+    @Override
+    public void addUpdateByOptimisticLockMethod(Interface interfaze, IntrospectedTable introspectedTable) {
+        //todo@wus 2018/8/28 
     }
 }

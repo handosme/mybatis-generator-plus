@@ -1,6 +1,7 @@
 package org.ihansen.mbp.extend;
 
 import org.mybatis.generator.api.IntrospectedTable;
+import org.mybatis.generator.api.dom.java.Interface;
 import org.mybatis.generator.api.dom.xml.Document;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 
@@ -13,7 +14,7 @@ public interface DBSupport {
      * @parameter @param introspectedTable
      * @createDate 2015年9月29日 上午10:20:11
      */
-    public void sqlDialect(Document document, IntrospectedTable introspectedTable);
+    void sqlDialect(Document document, IntrospectedTable introspectedTable);
 
     /**
      * 增加批量插入的xml配置
@@ -23,7 +24,7 @@ public interface DBSupport {
      * @parameter @param introspectedTable
      * @createDate 2015年8月9日 下午6:57:43
      */
-    public void addBatchInsertXml(Document document, IntrospectedTable introspectedTable);
+    void addBatchInsertXml(Document document, IntrospectedTable introspectedTable);
 
     /**
      * 条件查询sql适配
@@ -35,7 +36,7 @@ public interface DBSupport {
      * @parameter @param sufFixId
      * @createDate 2015年9月29日 上午11:59:06
      */
-    public XmlElement adaptSelectByExample(XmlElement element, IntrospectedTable introspectedTable);
+    XmlElement adaptSelectByExample(XmlElement element, IntrospectedTable introspectedTable);
 
     /**
      * 插入sql适配
@@ -45,5 +46,19 @@ public interface DBSupport {
      * @parameter @param introspectedTable
      * @createDate 2015年9月29日 下午12:00:37
      */
-    public void adaptInsertSelective(XmlElement element, IntrospectedTable introspectedTable);
+    void adaptInsertSelective(XmlElement element, IntrospectedTable introspectedTable);
+
+    /**
+     * 大偏移批量查询
+     * @param interfaze
+     * @param introspectedTable
+     */
+    void addSelectByBigOffsetMethod(Interface interfaze, IntrospectedTable introspectedTable);
+
+    /**
+     * 乐观锁更新
+     * @param interfaze
+     * @param introspectedTable
+     */
+    void addUpdateByOptimisticLockMethod(Interface interfaze, IntrospectedTable introspectedTable);
 }
