@@ -5,7 +5,7 @@
 [![Maven Central](https://img.shields.io/maven-central/v/org.apache.maven/apache-maven.svg)](http://search.maven.org/#artifactdetails%7Corg.ihansen.mbp%7Cmybatis-generator-plus%7C1.1%7Cjar)
 
 ### 1.介绍:  
-MyBatis generator plus 基于mybatis-generator-core v.1.3.2 扩展，增加如下主要特性:
+MyBatis generator plus 基于mybatis-generator-core v.1.3.2 扩展，增加了以下特性:
 1. 生成支持Oracle、Mysql、Sqlserver分页查询的代码:   
 ```java
 //分页查询demo
